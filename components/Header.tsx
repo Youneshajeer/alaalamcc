@@ -29,10 +29,10 @@ export default function Navbar() {
 
         {/* Navigation Links */}
         <nav className="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-700">
-          <a href="#hero" className="hover:text-blue-600 transition-colors">الرئيسية</a>
-          <a href="#services" className="hover:text-blue-600 transition-colors">خدماتنا</a>
-          <a href="#why-us" className="hover:text-blue-600 transition-colors">لماذا نحن</a>
-          <a href="#how-it-works" className="hover:text-blue-600 transition-colors">آلية العمل</a>
+          <a href="/" className="hover:text-blue-600 transition-colors">الرئيسية</a>
+          <a href="services" className="hover:text-blue-600 transition-colors">خدماتنا</a>
+          <a href="WhyUs" className="hover:text-blue-600 transition-colors">لماذا نحن</a>
+          <a href="HowItWorks" className="hover:text-blue-600 transition-colors">آلية العمل</a>
         </nav>
 
         {/* CTA Button */}
