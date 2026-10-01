@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 
 export default function Hero() {
@@ -46,25 +44,21 @@ export default function Hero() {
         }
       `}</style>
 
-      {/* 1. خلفية الصورة مع تحكم كامل بالشفافية والتدرجات لتجنب أي حجب مزعج */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
+      {/* 1. خلفية الصورة واضحة بدون حجب */}
+      <div className="absolute inset-0 z-0">
         <img
           src="/images/hero-bg.png"
           alt="خلفية مركز الاتصال"
-          className="w-full h-full object-cover object-center opacity-65"
+          className="w-full h-full object-cover object-center opacity-70"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-slate-950/40"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/30"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-950/40 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/50 via-transparent to-slate-950/70"></div>
       </div>
 
-      {/* 2. عناصر التوهج الخفيفة */}
-      <div className="absolute top-1/4 -right-20 w-80 h-80 bg-blue-600/15 rounded-full blur-3xl pointer-events-none"></div>
-      <div className="absolute bottom-10 -left-20 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-      {/* 3. محتوى الهيرو الأساسي */}
+      {/* 2. محتوى قسم الهيرو */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* استخدام flex-col لضمان تسلسل العناصر عمودياً على الموبايل (النصوص أولاً ثم الميزات تحتها بمسافة آمنة) */}
+        {/* استخدام flex-col في الموبايل لضمان نزول الميزات تحت المحتوى بالكامل وعدم تداخلها مع الصورة */}
         <div className="flex flex-col lg:grid lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
           
           {/* العمود الأيمن للنصوص */}
@@ -112,9 +106,9 @@ export default function Hero() {
 
           </div>
 
-          {/* قائمة الميزات (ستظهر منفصلة وتحت المحتوى بمسافة مريحة للموبايل، وبجانب النصوص في الشاشات الكبيرة) */}
-          <div className="lg:col-span-5 bg-slate-900/80 dark:bg-slate-950/80 backdrop-blur-md p-6 sm:p-8 rounded-3xl shadow-2xl border border-slate-800 space-y-4 self-center w-full">
-            <h3 className="text-lg font-bold text-white border-b border-slate-800 pb-3">
+          {/* قائمة الميزات (ستظهر بالأسفل في الموبايل، وبجانب النصوص في الشاشات الكبيرة) */}
+          <div className="lg:col-span-5 bg-sky-50/95 dark:bg-sky-950/60 backdrop-blur-md p-6 sm:p-8 rounded-3xl shadow-2xl border border-sky-200/80 space-y-4 self-center w-full z-20">
+            <h3 className="text-lg font-bold text-sky-950 dark:text-sky-200 border-b border-sky-200/60 pb-3">
               مميزات التشغيل السريع:
             </h3>
             
@@ -122,16 +116,16 @@ export default function Hero() {
               {points.map((point, idx) => (
                 <div
                   key={idx}
-                  className="flex items-start gap-3.5 p-3.5 rounded-2xl bg-slate-950/60 border border-slate-800/80 text-slate-200 transition-all duration-300 hover:bg-emerald-600 hover:border-emerald-500 hover:text-white hover:scale-[1.02] cursor-pointer group shadow-sm"
+                  className="flex items-start gap-3.5 p-3.5 rounded-2xl bg-sky-100/80 border border-sky-200 text-sky-950 transition-all duration-300 hover:bg-emerald-700 hover:border-emerald-600 hover:text-white hover:scale-[1.02] cursor-pointer group shadow-sm"
                 >
-                  <span className="text-2xl p-2 bg-slate-900 rounded-xl shadow-sm border border-slate-800 group-hover:bg-white/20 group-hover:border-white/30 transition-colors">
+                  <span className="text-2xl p-2 bg-white rounded-xl shadow-sm border border-sky-100 group-hover:bg-white/20 group-hover:border-white/30 transition-colors">
                     {point.icon}
                   </span>
                   <div>
-                    <h4 className="font-bold text-sm text-white group-hover:text-white transition-colors">
+                    <h4 className="font-bold text-sm text-sky-900 group-hover:text-white transition-colors">
                       {point.title}
                     </h4>
-                    <p className="text-xs text-slate-400 group-hover:text-emerald-50 transition-colors mt-0.5">
+                    <p className="text-xs text-sky-700 group-hover:text-emerald-50 transition-colors mt-0.5">
                       {point.desc}
                     </p>
                   </div>
