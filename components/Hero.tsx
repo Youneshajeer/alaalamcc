@@ -52,7 +52,7 @@ export default function Hero() {
           className="w-full h-full object-cover object-top opacity-100"
         />
         {/* تدرج سفلي خفيف لدمج الصورة بسلاسة */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-950/80"></div>
+        <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-slate-950/80"></div>
       </div>
 
       {/* 2. محتوى قسم الهيرو الأساسي */}
@@ -72,18 +72,18 @@ export default function Hero() {
                 </span>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight drop-shadow-md">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
                 نُشغّل خط التواصل مع عملائك، <br className="hidden sm:inline" />
-                {/* لون خط ذهبي متناسق ومشرق جداً ومقاوم للخلفية */}
-                <span className="bg-gradient-to-r from-yellow-300 via-amber-300 to-yellow-500 bg-clip-text text-transparent drop-shadow-[0_2px_10px_rgba(251,191,36,0.4)]">
+                {/* تدرج برتقالي/أصفر دافئ عالي التباين ليبرز بقوة فوق الخلفية السماوية */}
+                <span className="bg-linear-to-r from-amber-400 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(245,158,11,0.5)]">
                   وأنت تركّز على نمو عملك
                 </span>
               </h1>
             </div>
 
-            {/* تم زيادة الحشو والهامش العلوي للفقرة لتستقر تحت وجه الفتاة بدقة */}
+            {/* تم زيادة الحشو والهامش العلوي للفقرة لتستقر تحت وجه الفتاة بدقة مع نص أبيض نقي وواضحة جداً */}
             <div className="space-y-4 pt-1">
-              <p className="text-sm sm:text-base leading-relaxed max-w-2xl mx-auto lg:mx-0 font-medium text-white drop-shadow-md mt-8 sm:mt-10">
+              <p className="text-sm sm:text-base leading-relaxed max-w-2xl mx-auto lg:mx-0 font-semibold text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)] mt-8 sm:mt-10">
                 حلول العالم للاتصالات وتقنية المعلومات تبني وتُشغّل مراكز اتصال مخصصة للشركات في السعودية — استقبال، مبيعات هاتفية، دعم فني، وقنوات تواصل مكتوبة، على بنية تحتية مستضافة داخل المملكة.
               </p>
 
@@ -96,7 +96,7 @@ export default function Hero() {
                 </a>
                 <a
                   href="#services"
-                  className="bg-white/10 hover:bg-white/20 text-white border border-white/30 font-semibold px-8 py-3 rounded-xl backdrop-blur-md transition-all text-center active:scale-95 shadow-md text-sm sm:text-base"
+                  className="bg-white/15 hover:bg-white/25 text-white border border-white/40 font-semibold px-8 py-3 rounded-xl backdrop-blur-md transition-all text-center active:scale-95 shadow-md text-sm sm:text-base"
                 >
                   استعرض الخدمات
                 </a>
