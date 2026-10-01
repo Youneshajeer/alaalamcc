@@ -25,40 +25,41 @@ export default function Hero() {
   ];
 
   return (
-    <section id="hero" className="relative pt-6 pb-16 md:pt-10 md:pb-24 overflow-hidden bg-slate-950">
+    <section id="hero" className="relative pt-8 pb-16 md:pt-16 md:pb-28 overflow-hidden bg-slate-950">
       
-      {/* نمط الحركة للوميض المتكرر الكامل للجملة */}
+      {/* نمط الحركة للوميض المتكرر */}
       <style>{`
         @keyframes textGlowPulse {
           0%, 100% {
-            color: #4ade80; /* أخضر فاتح مضيء */
+            color: #4ade80;
             text-shadow: 0 0 12px rgba(74, 222, 128, 0.6);
           }
           50% {
-            color: #15803d; /* أخضر غامق */
+            color: #15803d;
             text-shadow: 0 0 2px rgba(21, 128, 61, 0.2);
           }
         }
         .animate-text-pulse {
           animation: textGlowPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        } 
+        }
       `}</style>
 
-      {/* 1. خلفية الصورة */}
+      {/* 1. خلفية الصورة واضحة بدون حجب */}
       <div className="absolute inset-0 z-0">
         <img
           src="/images/hero-bg.png"
           alt="خلفية مركز الاتصال"
-          className="w-full h-full object-cover object-center opacity-85"
+          className="w-full h-full object-cover object-center opacity-70"
         />
-        <div className="absolute inset-0 bg-linear-to-r from-slate-950/85 via-slate-950/45 to-transparent"></div>
-        <div className="absolute inset-0 bg-linear-to-b from-slate-950/60 via-transparent to-slate-950/70"></div>
+        {/* تدرج خفيف جداً من الأطراف فقط للحفاظ على وضوح وجمالية الصورة */}
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-950/40 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/50 via-transparent to-slate-950/70"></div>
       </div>
 
       {/* 2. محتوى قسم الهيرو */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* استخدام Flex لضمان الترتيب التلقائي على الموبايل (النصوص أولاً ثم المميزات تحتهما) وعلى الشاشات الكبيرة شبكة متقدمة */}
+        {/* شبكة متجاوبة: flex لترتيب الموبايل (النصوص فوق والميزات تحت الصورة)، و grid للشاشات الكبيرة */}
         <div className="flex flex-col lg:grid lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
           
           {/* العمود الأيمن للنصوص */}
@@ -67,18 +68,16 @@ export default function Hero() {
             {/* الجزء العلوي: الوسم والعنوان الرئيسي */}
             <div className="space-y-4">
               
-              {/* الوسم مع وميض متكرر للجملة بالكامل */}
-              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-emerald-950/40 border border-emerald-500/30 backdrop-blur-md shadow-sm mx-auto lg:mx-0">
+              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-emerald-950/50 border border-emerald-500/30 backdrop-blur-md shadow-sm mx-auto lg:mx-0">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
                 <span className="text-xs sm:text-sm font-extrabold animate-text-pulse tracking-wide">
                   مركز اتصال ومقر لخدمات الأعمال (BPO Call Center)
                 </span>
               </div>
 
-              {/* العنوان الرئيسي */}
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight drop-shadow-md">
                 نُشغّل خط التواصل مع عملائك، <br className="hidden sm:inline" />
-                <span className="bg-linear-to-r from-amber-200 via-yellow-400 to-amber-500 bg-clip-text text-transparent drop-shadow-lg">
+                <span className="bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-500 bg-clip-text text-transparent drop-shadow-lg">
                   وأنت تركّز على نمو عملك
                 </span>
               </h1>
@@ -86,7 +85,7 @@ export default function Hero() {
 
             {/* الجزء السفلي: الفقرة التوضيحية والأزرار */}
             <div className="space-y-5">
-              <p className="text-base sm:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0 font-medium text-white drop-shadow-md">
+              <p className="text-base sm:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0 font-medium text-slate-100 drop-shadow-md">
                 حلول العالم للاتصالات وتقنية المعلومات تبني وتُشغّل مراكز اتصال مخصصة للشركات في السعودية — استقبال، مبيعات هاتفية، دعم فني، وقنوات تواصل مكتوبة، على بنية تحتية مستضافة داخل المملكة.
               </p>
 
@@ -108,9 +107,9 @@ export default function Hero() {
 
           </div>
 
-          {/* قائمة الميزات (ستظهر تلقائياً تحت قسم النصوص والصورة في الموبايل، وبجانبها في شاشات سطح المكتب) */}
-          <div className="lg:col-span-5 bg-white/95 backdrop-blur-md p-6 sm:p-8 rounded-3xl shadow-2xl border border-slate-200 space-y-4 self-center w-full">
-            <h3 className="text-lg font-bold text-slate-900 border-b border-slate-200 pb-3">
+          {/* قائمة الميزات: خلفية باللون الأزرق السماوي وتتحول عند الhover إلى الأخضر القرمزي */}
+          <div className="lg:col-span-5 bg-sky-50/90 dark:bg-sky-950/40 backdrop-blur-md p-6 sm:p-8 rounded-3xl shadow-2xl border border-sky-200/80 space-y-4 self-center w-full">
+            <h3 className="text-lg font-bold text-sky-950 dark:text-sky-200 border-b border-sky-200/60 pb-3">
               مميزات التشغيل السريع:
             </h3>
             
@@ -118,16 +117,16 @@ export default function Hero() {
               {points.map((point, idx) => (
                 <div
                   key={idx}
-                  className="flex items-start gap-3.5 p-3.5 rounded-2xl bg-emerald-50/90 border border-emerald-200/80 text-emerald-950 transition-all duration-300 hover:bg-sky-500 hover:border-sky-400 hover:text-white hover:scale-[1.02] cursor-pointer group shadow-sm"
+                  className="flex items-start gap-3.5 p-3.5 rounded-2xl bg-sky-100/80 border border-sky-200 text-sky-950 transition-all duration-300 hover:bg-emerald-700 hover:border-emerald-600 hover:text-white hover:scale-[1.02] cursor-pointer group shadow-sm"
                 >
-                  <span className="text-2xl p-2 bg-white rounded-xl shadow-sm border border-emerald-100 group-hover:bg-white/20 group-hover:border-white/30 transition-colors">
+                  <span className="text-2xl p-2 bg-white rounded-xl shadow-sm border border-sky-100 group-hover:bg-white/20 group-hover:border-white/30 transition-colors">
                     {point.icon}
                   </span>
                   <div>
-                    <h4 className="font-bold text-sm text-emerald-900 group-hover:text-white transition-colors">
+                    <h4 className="font-bold text-sm text-sky-900 group-hover:text-white transition-colors">
                       {point.title}
                     </h4>
-                    <p className="text-xs text-emerald-700/90 group-hover:text-sky-50 transition-colors mt-0.5">
+                    <p className="text-xs text-sky-700 group-hover:text-emerald-50 transition-colors mt-0.5">
                       {point.desc}
                     </p>
                   </div>
