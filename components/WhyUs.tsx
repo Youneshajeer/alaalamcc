@@ -1,58 +1,235 @@
-import React from 'react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
+
+const dictionary = {
+  ar: {
+    badge: "شريكك التشغيلي المعتمد في السعودية",
+    titleMain: "لماذا يثق بنا",
+    titleHighlight: "قادة الأعمال والشركات؟",
+    description: "نحن لا نكتفي بتقديم خدمات مركز اتصال تقليدي، بل نبني لمؤسستك مركز عمليات مخصص يرفع من ثقة عملائك، ويحميك تنظيمياً، ويضمن أعلى كفاءة تشغيلية.",
+    coreFeatures: [
+      {
+        id: "security",
+        icon: "🛡️",
+        badge: "تشفير وأمان مؤسسي",
+        title: "أمان بُني على خبرة تقنية متقدمة",
+        desc: "بنية تحتية محمية بأحدث بروتوكولات أمن الشبكات المؤسسية، مصممة خصيصاً للتعامل مع البيانات الحساسة وفق أعلى معايير السرية والتشفير المعتمدة.",
+        highlight: "تشفير بيانات رفيع المستوى",
+      },
+      {
+        id: "compliance",
+        icon: "🏛️️",
+        badge: "امتثال نظامي 100% 🇸🇦",
+        title: "التزام كامل بالأنظمة والتشريعات المحلية",
+        desc: "مرخصون نظامياً لتقديم خدمات مراكز الاتصال وإسناد الأعمال، مع ضمان استضافة وحفظ كافة البيانات داخل مراكز بيانات معتمدة محلياً في السعودية.",
+        highlight: "استضافة البيانات داخل المملكة",
+      },
+      {
+        id: "talent",
+        icon: "👥",
+        badge: "كوادر وطنية مؤهلة",
+        title: "فريق عمل سعودي بإشراف تشغيلي مباشر",
+        desc: "نخبة من الكفاءات الوطنية المُدرّبة على أعلى معايير خدمة العملاء والمبيعات الهاتفية، تحت قيادة وإشراف ميداني مستمر لضمان أعلى درجات الجودة.",
+        highlight: "إشراف تشغيلي حثيث",
+      },
+      {
+        id: "scalability",
+        icon: "⚡",
+        badge: "توسع مرن بلا احتكاك",
+        title: "سعة تشغيلية مرنة تتكيف مع نموك",
+        desc: "إمكانية البدء بفريق عمل متخصص صغير وتوسعة المقاعد التشغيلية فوراً وبسلاسة تامة مع نمو نشاطك التجاري ودون الحاجة لإعادة التأسيس.",
+        highlight: "تدرّج تشغيلي فوري",
+      }
+    ],
+    enterpriseStats: [
+      { number: "100%", label: "استضافة سحابية داخل السعودية", icon: "🇸🇦" },
+      { number: "99.9%", label: "جاهزية واستقرار الخدمة (SLA)", icon: "⚡" },
+      { number: "7054811208", label: "السجل التجاري المعتمد", icon: "📜" },
+      { number: "24/7", label: "مراقبة وإشراف تشغيلي مستمر", icon: "🎧" }
+    ],
+    ctaTitle: "دعنا نُصمّم مركز الاتصال الخـاص بمؤسستك",
+    ctaDesc: "تواصل مع مستشاري التشغيل لدينا للحصول على دراسة احتياج مخصصة وخطة تشغيل سريعة الانطلاق.",
+    ctaButton: "احجز جلسة استشارية"
+  },
+  en: {
+    badge: "Your Certified Operational Partner in Saudi Arabia",
+    titleMain: "Why Business Leaders",
+    titleHighlight: "Trust Us?",
+    description: "We don't just provide traditional call center services; we build a dedicated operations center for your enterprise that boosts customer trust, ensures regulatory compliance, and guarantees top operational efficiency.",
+    coreFeatures: [
+      {
+        id: "security",
+        icon: "🛡️",
+        badge: "Enterprise Security & Encryption",
+        title: "Security Built on Advanced Technical Expertise",
+        desc: "Infrastructure protected by the latest enterprise network security protocols, custom-designed to handle sensitive customer data under strict confidentiality and encryption standards.",
+        highlight: "High-level data encryption",
+      },
+      {
+        id: "compliance",
+        icon: "🏛️",
+        badge: "100% Regulatory Compliance 🇸🇦",
+        title: "Full Commitment to Local Regulations & Laws",
+        desc: "Officially licensed to provide call center and business outsourcing services, ensuring all data is hosted and stored locally within certified data centers in Saudi Arabia.",
+        highlight: "Data hosting inside the Kingdom",
+      },
+      {
+        id: "talent",
+        icon: "👥",
+        badge: "Qualified National Talents",
+        title: "Saudi Workforce with Direct Operational Supervision",
+        desc: "Elite national talents trained to the highest global customer service and telemarketing standards, operating under continuous field supervision to ensure peak quality.",
+        highlight: "Active operational supervision",
+      },
+      {
+        id: "scalability",
+        icon: "⚡",
+        badge: "Frictionless Scalability",
+        title: "Flexible Capacity That Adapts to Your Growth",
+        desc: "Start with a small specialized team and expand operational seats instantly and seamlessly as your business grows without the need to rebuild systems.",
+        highlight: "Instant operational scaling",
+      }
+    ],
+    enterpriseStats: [
+      { number: "100%", label: "Cloud Hosting in Saudi Arabia", icon: "🇸🇦" },
+      { number: "99.9%", label: "Service Availability & SLA", icon: "⚡" },
+      { number: "7054811208", label: "Certified Commercial Register", icon: "📜" },
+      { number: "24/7", label: "Continuous Monitoring & Ops", icon: "🎧" }
+    ],
+    ctaTitle: "Let Us Design Your Enterprise Call Center",
+    ctaDesc: "Contact our operations consultants to get a customized needs assessment and a rapid deployment plan.",
+    ctaButton: "Book a Consultation Session"
+  }
+};
 
 export default function WhyUs() {
-  const reasons = [
-    {
-      title: "أمان بُني على خبرة تقنية",
-      desc: "بنية تحتية محمية بأدوات أمن شبكات مؤسسية متطورة، مصممة خصيصاً للتعامل مع بيانات العملاء الحساسة وفق أعلى المعايير.",
-      icon: "🛡️"
-    },
-    {
-      title: "امتثال نظامي منذ اليوم الأول",
-      desc: "تسجيل رسمي لخدمة مركز الاتصال، مع استضافة البيانات وتصريح موقعها بالكامل داخل المملكة العربية السعودية.",
-      icon: "🏛️"
-    },
-    {
-      title: "فريق سعودي متخصص",
-      desc: "كوادر وطنية مدرّبة ومؤهلة وفق معايير عالمية لخدمة العملاء، مع وجود إشراف تشغيلي مباشر لضمان الجودة.",
-      icon: "👥"
-    },
-    {
-      title: "تدرّج بلا احتكاك",
-      desc: "إمكانية البدء بفريق صغير وتوسعة السعة التشغيلية تدريجياً وبسلاسة تامة دون الحاجة لإعادة بناء الأنظمة.",
-      icon: "⚡"
-    },
-  ];
+  const [lang, setLang] = useState<'ar' | 'en'>('ar');
+
+  useEffect(() => {
+    const savedLang = (localStorage.getItem('lang') as 'ar' | 'en') || 'ar';
+    setLang(savedLang);
+
+    const checkLangInterval = setInterval(() => {
+      const currentLang = (localStorage.getItem('lang') as 'ar' | 'en') || 'ar';
+      if (currentLang !== lang) {
+        setLang(currentLang);
+      }
+    }, 100);
+
+    return () => clearInterval(checkLangInterval);
+  }, [lang]);
+
+  const t = dictionary[lang];
 
   return (
-    <section id="why-us" className="py-20 bg-slate-900 text-white relative overflow-hidden">
-      <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
-      <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-emerald-600/20 rounded-full blur-3xl pointer-events-none"></div>
+    <section id="why-us" className={`py-24 bg-white text-slate-900 relative overflow-hidden ${lang === 'ar' ? 'dir-rtl' : 'dir-ltr'}`} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+      
+      <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] bg-size-[24px_24px] opacity-60 pointer-events-none"></div>
+      <div className="absolute top-1/4 -right-28 w-125 h-125 bg-emerald-100/40 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute bottom-10 -left-28 w-125 h-125 bg-sky-100/40 rounded-full blur-[120px] pointer-events-none"></div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-xs font-bold uppercase tracking-widest text-emerald-400 mb-2">شريكك الموثوق</h2>
-          <h3 className="text-3xl sm:text-4xl font-extrabold text-white">
-            لماذا تختار "حلول العالم"؟
-          </h3>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-20">
+        
+        <div className="text-center max-w-3xl mx-auto space-y-4">
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-800 text-xs sm:text-sm font-bold shadow-sm">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+            </span>
+            {t.badge}
+          </div>
+
+          <h2 className="text-3xl sm:text-5xl font-black text-slate-900 leading-tight tracking-tight">
+            {t.titleMain} <br />
+            <span className="bg-linear-to-r from-amber-500 via-amber-600 to-yellow-600 bg-clip-text text-transparent">
+              {t.titleHighlight}
+            </span>
+          </h2>
+
+          <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal">
+            {t.description}
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {reasons.map((item, idx) => (
+          {t.coreFeatures.map((feature) => (
             <div
-              key={idx}
-              className="bg-slate-800/60 backdrop-blur-md p-8 rounded-3xl border border-slate-700/60 hover:border-emerald-400/50 transition-all flex gap-5"
+              key={feature.id}
+              className={`group relative bg-white border border-slate-200/90 rounded-3xl p-8 sm:p-10 transition-all duration-300 hover:shadow-2xl hover:shadow-slate-200/80 hover:border-emerald-400/80 flex flex-col justify-between overflow-hidden ${lang === 'ar' ? 'text-right' : 'text-left'}`}
             >
-              <div className="text-3xl p-3.5 bg-slate-700/50 rounded-2xl h-fit border border-slate-600">
-                {item.icon}
+              <div className="absolute top-0 left-0 w-full h-1 bg-slate-100 group-hover:bg-linear-to-r group-hover:from-emerald-400 group-hover:to-amber-400 transition-all duration-500"></div>
+
+              <div className="space-y-6">
+                <div className={`flex justify-between items-center ${lang === 'en' ? 'flex-row-reverse' : ''}`}>
+                  <span className="text-xs font-bold px-3.5 py-1.5 rounded-full bg-emerald-50/80 border border-emerald-200/60 text-emerald-800">
+                    {feature.badge}
+                  </span>
+                  <div className="w-14 h-14 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center text-3xl shadow-sm group-hover:bg-emerald-500 group-hover:text-white group-hover:scale-110 transition-all duration-300">
+                    {feature.icon}
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <h3 className="text-xl sm:text-2xl font-bold text-slate-900 group-hover:text-emerald-800 transition-colors">
+                    {feature.title}
+                  </h3>
+                  <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                    {feature.desc}
+                  </p>
+                </div>
               </div>
-              <div>
-                <h4 className="text-xl font-bold text-white mb-2">{item.title}</h4>
-                <p className="text-slate-300 text-sm leading-relaxed">{item.desc}</p>
+
+              <div className="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-slate-500">
+                <span className="flex items-center gap-2 text-emerald-700">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                  {feature.highlight}
+                </span>
+                <span className="text-slate-400 group-hover:-translate-x-1 transition-transform">
+                  {lang === 'ar' ? '←' : '→'}
+                </span>
               </div>
             </div>
           ))}
         </div>
+
+        <div className="bg-slate-950 text-white rounded-3xl p-8 sm:p-12 shadow-2xl border border-slate-800 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+          
+          <div className="relative z-10 grid grid-cols-2 lg:grid-cols-4 gap-8 text-center divide-y lg:divide-y-0 lg:divide-x lg:divide-x-reverse divide-slate-800/80">
+            {t.enterpriseStats.map((stat, idx) => (
+              <div key={idx} className={`${idx !== 0 ? 'pt-6 lg:pt-0' : ''} space-y-2`}>
+                <div className="text-2xl sm:text-3xl font-black text-amber-400 flex items-center justify-center gap-2">
+                  <span>{stat.number}</span>
+                </div>
+                <div className="text-xs sm:text-sm text-slate-300 font-medium">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+=        <div className={`bg-linear-to-r from-slate-900 via-slate-900 to-slate-950 border border-slate-800 text-white rounded-3xl p-8 sm:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+          <div className="space-y-3">
+            <h3 className="text-2xl sm:text-3xl font-black">
+              {t.ctaTitle}
+            </h3>
+            <p className="text-slate-300 text-sm sm:text-base max-w-xl">
+              {t.ctaDesc}
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+            <a
+              href="#contact"
+              className="bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold px-8 py-4 rounded-xl shadow-lg shadow-emerald-500/25 transition-all text-center text-sm whitespace-nowrap active:scale-95"
+            >
+              {t.ctaButton}
+            </a>
+          </div>
+        </div>
+
       </div>
     </section>
   );

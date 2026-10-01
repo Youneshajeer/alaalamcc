@@ -1,131 +1,139 @@
-import React from 'react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import ar from '@/i18n/ar.json';
+import en from '@/i18n/en.json';
+
+const dictionaries = { ar, en };
 
 export default function Services() {
+  const [lang, setLang] = useState<'ar' | 'en'>('ar');
+
+  useEffect(() => {
+    const savedLang = (localStorage.getItem('lang') as 'ar' | 'en') || 'ar';
+    setLang(savedLang);
+
+    const checkLangInterval = setInterval(() => {
+      const currentLang = (localStorage.getItem('lang') as 'ar' | 'en') || 'ar';
+      if (currentLang !== lang) {
+        setLang(currentLang);
+      }
+    }, 100);
+
+    return () => clearInterval(checkLangInterval);
+  }, [lang]);
+
+  const dict = dictionaries[lang];
+  const t = dict.services;
+  const commonT = dict.common;
+
   const servicesList = [
     {
-      num: "01",
-      icon: "🎧",
-      title: "الاستقبال وخدمة العملاء (Inbound)",
-      desc: "إدارة متكاملة لخطوط الاستقبال والرد على استفسارات عملائك على مدار الساعة بنبرة احترافية تعكس هوية علامتك التجارية.",
-      badge: "جاهزية 24/7",
-      features: [
-        "إدارة الشكاوى والمقترحات وتتبع التذاكر برقم مرجعي",
-        "توجيه ذكي ومخصص للمكالمات (Smart IVR Routing)",
-        "قياس مؤشرات رضا العملاء الفورية (CSAT)"
-      ]
+      num: t.inbound.number,
+      icon: t.inbound.icon,
+      title: t.inbound.title,
+      desc: t.inbound.description,
+      badge: t.inbound.badge,
+      features: t.inbound.features
     },
     {
-      num: "02",
-      icon: "📞",
-      title: "المبيعات الهاتفية والتسويق (Outbound)",
-      desc: "حملات اتصال صادرة لتأهيل العملاء المحتملين، متابعة المبيعات، وجدولة المواعيد الميدانية لزيادة معدل التحويل.",
-      badge: "رفع المبيعات",
-      features: [
-        "تأهيل العملاء المحتملين (Lead Qualification)",
-        "تنشيط الحسابات الخاملة ومتابعة السلات المتروكة",
-        "إعداد سيناريوهات بيع مخصصة (Custom Scripts)"
-      ]
+      num: t.outbound.number,
+      icon: t.outbound.icon,
+      title: t.outbound.title,
+      desc: t.outbound.description,
+      badge: t.outbound.badge,
+      features: t.outbound.features
     },
     {
-      num: "03",
-      icon: "🛠",
-      title: "الدعم الفني وتتبع التذاكر (Tech Support)",
-      desc: "فريق متخصص لمعالجة أعطال المستوى الأول والثاني (L1 & L2) والتصعيد المنظم للمستويات الأعلى مع متابعة الحل.",
-      badge: "كفاءة تقنية",
-      features: [
-        "إدارة منصات الدعم الفني وتذاكر الصيانة",
-        "متابعة دقيقة لاتفاقيات مستوى الخدمة (SLA)",
-        "توثيق المشاكل في قاعدة معرفية مخصصة (Knowledge Base)"
-      ]
+      num: t.technicalSupport.number,
+      icon: t.technicalSupport.icon,
+      title: t.technicalSupport.title,
+      desc: t.technicalSupport.description,
+      badge: t.technicalSupport.badge,
+      features: t.technicalSupport.features
     },
     {
-      num: "04",
-      icon: "📩",
-      title: "إدارة القنوات المكتوبة (Omnichannel)",
-      desc: "إدارة متكاملة لمحادثات واتساب للأعمال، البريد الإلكتروني، والدردشة الحية من منصة موحدة بنفس المعايير الصوتية.",
-      badge: "تواصل رقمي",
-      features: [
-        "ربط الواتساب المعتمد (WhatsApp Business API)",
-        "الرد الآلي الذكي والتصعيد للموظف المختص",
-        "سجل موحد لجميع المحادثات عبر مختلف القنوات"
-      ]
+      num: t.omnichannel.number,
+      icon: t.omnichannel.icon,
+      title: t.omnichannel.title,
+      desc: t.omnichannel.description,
+      badge: t.omnichannel.badge,
+      features: t.omnichannel.features
     }
   ];
 
   const qualityMetrics = [
-    { label: "نسبة استجابة المكالمات (SLA)", value: "95%+" },
-    { label: "مؤشر رضا العملاء (CSAT)", value: "98%" },
-    { label: "استضافة البيانات", value: "100% داخل السعودية" },
+    { label: t.infrastructure.stats.sla.label, value: t.infrastructure.stats.sla.value },
+    { label: t.infrastructure.stats.csat.label, value: t.infrastructure.stats.csat.value },
+    { label: t.infrastructure.stats.hosting.label, value: t.infrastructure.stats.hosting.value },
   ];
 
   return (
-    <section id="services" className="py-20 bg-white text-slate-900 relative overflow-hidden">
+    <section 
+      id="services" 
+      dir={lang === 'ar' ? 'rtl' : 'ltr'}
+      className={`py-20 bg-white dark:bg-slate-950 text-slate-900 dark:text-white relative overflow-hidden transition-colors duration-300 ${lang === 'ar' ? 'text-right' : 'text-left'}`}
+    >
       
-      {/* 1. مؤثرات خلفية إبداعية (Glow Effects & Grid Pattern) */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#f1f5f9_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f9_1px,transparent_1px)] bg-size-[4rem_4rem] mask-[radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-70 pointer-events-none"></div>
-      <div className="absolute -top-24 right-10 w-96 h-96 bg-emerald-100/60 rounded-full blur-3xl pointer-events-none"></div>
-      <div className="absolute bottom-10 left-10 w-96 h-96 bg-sky-100/60 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#f1f5f9_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f9_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-size-[4rem_4rem] mask-[radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-70 pointer-events-none"></div>
+      <div className="absolute -top-24 right-10 w-96 h-96 bg-emerald-100/60 dark:bg-emerald-900/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute bottom-10 left-10 w-96 h-96 bg-sky-100/60 dark:bg-sky-900/10 rounded-full blur-3xl pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
         
-        {/* 2. رأس الصفحة مع التدرج الذهبي والوسم الأخضر */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs sm:text-sm font-bold shadow-sm">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 text-xs sm:text-sm font-bold shadow-sm">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            خدمات تشغيل مراكز الاتصال وإسناد الأعمال (BPO)
+            {t.hero.eyebrow}
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-black text-slate-900 leading-tight">
-            حلول تشغيلية متكاملة <br />
-            <span className="bg-linear-to-r from-amber-500 via-amber-600 to-yellow-600 bg-clip-text text-transparent">
-              لتنمية أعمالك في السعودية
+          <h2 className="text-3xl sm:text-5xl font-black leading-tight">
+            {t.hero.title} <br />
+            <span className="bg-linear-to-r from-amber-500 via-amber-600 to-yellow-600 dark:from-amber-400 dark:to-yellow-400 bg-clip-text text-transparent">
+              {t.hero.titleHighlight}
             </span>
           </h2>
 
-          <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal">
-            نُشغّل ونُدير مراكز اتصال مخصصة للشركات عبر بنية سحابية موثوقة ومستضافة داخل المملكة لضمان أعلى مستويات الأمان والجودة بالاعتماد على كوادر وطنية مؤهلة.
+          <p className="text-slate-600 dark:text-slate-400 text-base sm:text-lg leading-relaxed font-normal">
+            {t.hero.description}
           </p>
         </div>
 
-        {/* 3. شبكة بطاقات الخدمات (4 بطاقات بتصميم تفاعلي راقٍ) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {servicesList.map((service, index) => (
             <div
               key={index}
-              className="group relative bg-white border border-slate-200/80 rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm hover:shadow-xl hover:border-emerald-400 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
+              className="group relative bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm hover:shadow-xl hover:border-emerald-400 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
             >
               <div className="space-y-4">
-                {/* الجزء العلوي للبطاقة */}
                 <div className="flex justify-between items-center">
                   <div className="flex items-center gap-3.5">
-                    <span className="text-3xl p-3 bg-slate-50 rounded-2xl border border-slate-100 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
+                    <span className="text-3xl p-3 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
                       {service.icon}
                     </span>
-                    <span className="text-2xl font-black text-slate-300 group-hover:text-emerald-500 transition-colors">
+                    <span className="text-2xl font-black text-slate-300 dark:text-slate-700 group-hover:text-emerald-500 transition-colors">
                       {service.num}
                     </span>
                   </div>
 
-                  <span className="text-xs font-bold px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700">
+                  <span className="text-xs font-bold px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400">
                     {service.badge}
                   </span>
                 </div>
 
-                {/* عنوان ووصف الخدمة */}
-                <h3 className="text-xl sm:text-2xl font-bold text-slate-900 group-hover:text-emerald-700 transition-colors">
+                <h3 className="text-xl sm:text-2xl font-bold group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">
                   {service.title}
                 </h3>
 
-                <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
                   {service.desc}
                 </p>
 
-                <hr className="border-slate-100 my-4" />
+                <hr className="border-slate-100 dark:border-slate-800 my-4" />
 
-                {/* قائمة الفوائد والمميزات التفصيلية */}
                 <ul className="space-y-2.5">
                   {service.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700">
+                    <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
                       <span className="text-emerald-500 font-bold mt-0.5">✓</span>
                       <span>{feature}</span>
                     </li>
@@ -133,20 +141,18 @@ export default function Services() {
                 </ul>
               </div>
 
-              {/* زر الطلب المباشر */}
               <div className="pt-4">
                 <a
                   href="#contact"
-                  className="block text-center w-full bg-slate-900 hover:bg-emerald-600 text-white font-bold py-3 px-6 rounded-xl transition-all duration-200 text-sm shadow-md active:scale-95"
+                  className="block text-center w-full bg-slate-900 dark:bg-slate-800 hover:bg-emerald-600 dark:hover:bg-emerald-600 text-white font-bold py-3 px-6 rounded-xl transition-all duration-200 text-sm shadow-md active:scale-95"
                 >
-                  اطلب هذه الخدمة
+                  {commonT.cta.requestService}
                 </a>
               </div>
             </div>
           ))}
         </div>
 
-        {/* 4. شريط مؤشرات الأداء والجودة التشغيلية */}
         <div className="bg-slate-900 text-white rounded-3xl p-8 shadow-xl relative overflow-hidden">
           <div className="absolute -right-10 -bottom-10 w-60 h-60 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none"></div>
           
@@ -164,14 +170,13 @@ export default function Services() {
           </div>
         </div>
 
-        {/* 5. قسم الامتثال واستضافة البيانات والمحاذاة السريعة */}
-        <div className="bg-emerald-50/80 border border-emerald-200/80 rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
-          <div className="space-y-1.5 text-center md:text-right">
-            <h4 className="text-base sm:text-lg font-bold text-emerald-950 flex items-center justify-center md:justify-start gap-2">
-              <span>🇸🇦</span> بنية تحتية مستضافة بالكامل داخل المملكة العربية السعودية
+        <div className="bg-emerald-50/80 dark:bg-emerald-950/30 border border-emerald-200/80 dark:border-emerald-800/80 rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+          <div className="space-y-1.5">
+            <h4 className="text-base sm:text-lg font-bold text-emerald-950 dark:text-emerald-300 flex items-center gap-2">
+              <span>🇸🇦</span> {t.infrastructure.title}
             </h4>
-            <p className="text-xs sm:text-sm text-emerald-800">
-              جميع الأنظمة متوافقة مع المتطلبات الوطنية ومعايير ربط الـ CRM المباشر مع أنظمتكم.
+            <p className="text-xs sm:text-sm text-emerald-800 dark:text-emerald-400">
+              {t.infrastructure.description}
             </p>
           </div>
 
@@ -179,11 +184,11 @@ export default function Services() {
             href="#contact"
             className="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold px-6 py-3.5 rounded-xl shadow-lg shadow-emerald-600/20 transition-all text-sm whitespace-nowrap active:scale-95"
           >
-            طلب عرض سعر مخصص
+            {commonT.cta.requestQuote}
           </a>
         </div>
 
-      </div>
+      </div> 
     </section>
   );
 }

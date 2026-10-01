@@ -9,11 +9,9 @@ export default function Header() {
   const [lang, setLang] = useState<'ar' | 'en'>('ar');
   const [mounted, setMounted] = useState(false);
 
-  // مزامنة الحالة مع الـ DOM وعند التحميل
   useEffect(() => {
     setMounted(true);
     
-    // فحص وضع الدارك مود الحالي في HTML
     const isDark = document.documentElement.classList.contains('dark') || 
                    localStorage.getItem('theme') === 'dark';
     
@@ -39,7 +37,6 @@ export default function Header() {
     { name: lang === 'ar' ? 'آلية العمل' : 'How It Works', href: '/how_it_works' },
   ];
 
-  // دالة تبديل الدارك مود الفورية
   const handleToggleDarkMode = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -58,7 +55,6 @@ export default function Header() {
     }
   };
 
-  // دالة تبديل اللغة الخاصة بك
   const handleToggleLanguage = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -69,7 +65,6 @@ export default function Header() {
     document.documentElement.dir = nextLang === 'ar' ? 'rtl' : 'ltr';
     document.documentElement.lang = nextLang;
     
-    // إعادة تحميل الصفحة لتحديث الترجمات البسيطة إن وجدت بسلاسة تامة
     window.location.reload();
   };
 
@@ -77,7 +72,6 @@ export default function Header() {
     <header className="sticky top-0 z-50 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         
-        {/* الشعار والهوية الرقمية */}
         <Link href="/" className="flex items-center gap-3.5 group">
           <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-2xl bg-white flex items-center justify-center shadow-md border border-slate-100 p-1 group-hover:scale-105 transition-transform">
             <img 
@@ -96,7 +90,6 @@ export default function Header() {
           </div>
         </Link>
 
-        {/* 2. روابط التنقل الكبيرة (Desktop Navigation) */}
         <nav className="hidden lg:flex items-center gap-7 text-sm font-bold text-slate-700 dark:text-slate-200">
           {navLinks.map((link, idx) => (
             <Link 
@@ -109,9 +102,7 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* 3. الأدوات الرئيسية */}
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* زر التبديل للدارك مود */}
           <button
             type="button"
             onClick={handleToggleDarkMode}
@@ -121,7 +112,6 @@ export default function Header() {
             {mounted && isDarkMode ? '☀️' : '🌙'}
           </button>
 
-          {/* زر تبديل اللغة */}
           <button
             type="button"
             onClick={handleToggleLanguage}
@@ -130,7 +120,6 @@ export default function Header() {
             {lang === 'ar' ? 'EN' : 'عربي'}
           </button>
 
-          {/* أزرار الحساب لسطح المكتب */}
           <div className="hidden lg:flex items-center gap-3 border-r border-slate-200 dark:border-slate-800 pr-3">
             <Link 
               href="/login" 
@@ -152,7 +141,6 @@ export default function Header() {
             </Link>
           </div>
 
-          {/* زر البرجر للموبايل */}
           <button
             type="button"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -170,7 +158,6 @@ export default function Header() {
         </div>
       </div>
 
-      {/* خلفية معتمة لقائمة الجوال */}
       {isMobileMenuOpen && (
         <div 
           onClick={() => setIsMobileMenuOpen(false)}
@@ -178,7 +165,6 @@ export default function Header() {
         />
       )}
 
-      {/* 4. قائمة الجوال المنسدلة */}
       <div 
         className={`lg:hidden relative z-50 transition-all duration-300 ease-in-out overflow-hidden bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 shadow-xl ${
           isMobileMenuOpen ? 'max-h-125 opacity-100' : 'max-h-0 opacity-0 pointer-events-none'

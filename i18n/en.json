@@ -1,0 +1,382 @@
+
+{
+  "common": {
+    "cta": {
+      "requestDemo": "Request a Demo",
+      "viewServices": "Explore Services",
+      "requestService": "Request This Service",
+      "requestQuote": "Request a Custom Quote",
+      "bookConsultation": "Book a Consultation",
+      "startSession": "Start Your First Session"
+    }
+  },
+
+  "home": {
+    "hero": {
+      "eyebrow": "Business Process Outsourcing & Call Center (BPO)",
+      "title": "We manage your customer communications,",
+      "titleHighlight": "so you can focus on growing your business",
+      "description": "Alaalam Communications & IT Solutions builds and operates dedicated call centers for businesses across Saudi Arabia — covering inbound services, telesales, technical support, and written communication channels, powered by infrastructure hosted within the Kingdom."
+    },
+
+    "quickFeatures": {
+      "title": "Built for Fast Deployment",
+
+      "saudiHosting": {
+        "icon": "🇸🇦",
+        "title": "Saudi-Based Hosting",
+        "description": "Reliable cloud infrastructure hosted in Riyadh"
+      },
+
+      "registered": {
+        "icon": "📜",
+        "title": "Regulatory Registration",
+        "description": "Registered with the relevant authority for call center services"
+      },
+
+      "multichannel": {
+        "icon": "💬",
+        "title": "Multichannel Support",
+        "description": "Phone, WhatsApp, email, and live chat"
+      },
+
+      "flexibleCapacity": {
+        "icon": "📈",
+        "title": "Flexible Capacity",
+        "description": "From a small dedicated team to expanded operations as needed"
+      }
+    },
+
+    "services": {
+      "eyebrow": "Call Center Services",
+      "title": "End-to-End Solutions for Your Customer Operations",
+
+      "inbound": {
+        "number": "01",
+        "icon": "🎧",
+        "title": "Inbound & Customer Support",
+        "description": "Handle customer inquiries, complaints, and service requests according to your business policies while delivering a consistently professional customer experience."
+      },
+
+      "outbound": {
+        "number": "02",
+        "icon": "📞",
+        "title": "Telesales",
+        "description": "Outbound sales and marketing campaigns, lead qualification, and appointment scheduling for field sales teams to help increase sales."
+      },
+
+      "technicalSupport": {
+        "number": "03",
+        "icon": "🛠",
+        "title": "Technical Support",
+        "description": "First-level technical support, ticket management, and structured escalation to your technical team with fast and professional resolution."
+      },
+
+      "writtenChannels": {
+        "number": "04",
+        "icon": "📩",
+        "title": "Written Communication Channels",
+        "description": "WhatsApp Business, email, and live chat — managed with the same high standards applied to voice support."
+      }
+    },
+
+    "whyUs": {
+      "eyebrow": "Your Trusted Partner",
+      "title": "Why Choose Alaalam?",
+
+      "security": {
+        "icon": "🛡️",
+        "title": "Security Built on Technical Expertise",
+        "description": "Enterprise-grade network security infrastructure designed to protect sensitive customer data according to high security and confidentiality standards."
+      },
+
+      "compliance": {
+        "icon": "🏛️",
+        "title": "Regulatory Compliance from Day One",
+        "description": "Officially registered for call center services, with data hosted and its location maintained entirely within the Kingdom of Saudi Arabia."
+      },
+
+      "saudiTeam": {
+        "icon": "👥",
+        "title": "Specialized Saudi Team",
+        "description": "Qualified and professionally trained Saudi talent delivering customer service according to international standards, supported by direct operational supervision."
+      },
+
+      "scalability": {
+        "icon": "⚡",
+        "title": "Seamless Scalability",
+        "description": "Start with a focused team and expand your operational capacity smoothly as your business grows, without rebuilding your systems."
+      }
+    },
+
+    "workflow": {
+      "eyebrow": "Partnership Journey",
+      "title": "How We Work",
+
+      "step1": {
+        "number": "1",
+        "title": "Discovery Session",
+        "description": "We understand your business, expected call volumes, quality requirements, and operational needs to define the right setup."
+      },
+
+      "step2": {
+        "number": "2",
+        "title": "Custom Setup",
+        "description": "Develop call scripts, integrate your systems, and prepare the dedicated team assigned to your account."
+      },
+
+      "step3": {
+        "number": "3",
+        "title": "Pilot Operation",
+        "description": "Run a controlled performance period with daily reporting and real-time adjustments before full-scale deployment."
+      },
+
+      "step4": {
+        "number": "4",
+        "title": "Go-Live & Scale",
+        "description": "Move into full operations with ongoing reporting and the flexibility to increase capacity as your business grows."
+      }
+    },
+
+    "stats": {
+      "callResponse": {
+        "value": "95%+",
+        "label": "Call Response Rate (SLA)"
+      },
+      "customerSatisfaction": {
+        "value": "98%",
+        "label": "Customer Satisfaction (CSAT)"
+      },
+      "dataHosting": {
+        "value": "100% in Saudi Arabia",
+        "label": "Data Hosting"
+      }
+    }
+  },
+
+  "services": {
+    "hero": {
+      "eyebrow": "Call Center & Business Process Outsourcing (BPO)",
+      "title": "End-to-End Operational Solutions",
+      "titleHighlight": "Built to Grow Your Business in Saudi Arabia",
+      "description": "We operate and manage dedicated call centers for businesses through reliable cloud infrastructure hosted within the Kingdom, delivering high standards of security and service quality through qualified Saudi talent."
+    },
+
+    "inbound": {
+      "number": "01",
+      "icon": "🎧",
+      "badge": "24/7 Availability",
+      "title": "Inbound & Customer Service",
+      "description": "End-to-end management of inbound lines and customer inquiries around the clock, with a professional voice that reflects your brand identity.",
+      "features": [
+        "Complaint and suggestion management with reference-based ticket tracking",
+        "Smart and customized call routing (Smart IVR Routing)",
+        "Real-time customer satisfaction measurement (CSAT)"
+      ]
+    },
+
+    "outbound": {
+      "number": "02",
+      "icon": "📞",
+      "badge": "Drive Sales",
+      "title": "Telesales & Outbound Marketing",
+      "description": "Outbound calling campaigns focused on lead qualification, sales follow-up, and field appointment scheduling to improve conversion rates.",
+      "features": [
+        "Lead qualification",
+        "Reactivation of dormant accounts and abandoned cart follow-up",
+        "Customized sales scripts"
+      ]
+    },
+
+    "technicalSupport": {
+      "number": "03",
+      "icon": "🛠",
+      "badge": "Technical Efficiency",
+      "title": "Technical Support & Ticket Management",
+      "description": "A specialized team handling Level 1 and Level 2 technical issues (L1 & L2), with structured escalation to higher support levels and continuous resolution tracking.",
+      "features": [
+        "Technical support platforms and maintenance ticket management",
+        "Detailed SLA monitoring and compliance",
+        "Issue documentation through a dedicated knowledge base"
+      ]
+    },
+
+    "omnichannel": {
+      "number": "04",
+      "icon": "📩",
+      "badge": "Digital Communication",
+      "title": "Omnichannel Communication Management",
+      "description": "Unified management of WhatsApp Business, email, and live chat through a single platform, following the same service standards across every channel.",
+      "features": [
+        "Official WhatsApp Business API integration",
+        "Automated responses with intelligent escalation to the appropriate agent",
+        "Unified conversation history across all communication channels"
+      ]
+    },
+
+    "infrastructure": {
+      "stats": {
+        "sla": {
+          "value": "95%+",
+          "label": "Call Response Rate (SLA)"
+        },
+        "csat": {
+          "value": "98%",
+          "label": "Customer Satisfaction (CSAT)"
+        },
+        "hosting": {
+          "value": "100% in Saudi Arabia",
+          "label": "Data Hosting"
+        }
+      },
+
+      "title": "Infrastructure Fully Hosted Within the Kingdom of Saudi Arabia",
+      "description": "All systems are aligned with applicable national requirements and support direct CRM integration with your existing systems."
+    }
+  },
+
+  "whyUs": {
+    "hero": {
+      "eyebrow": "Your Trusted Operational Partner in Saudi Arabia",
+      "title": "Why Business Leaders",
+      "titleHighlight": "Trust Alaalam",
+      "description": "We go beyond traditional call center services. We build a dedicated operations center for your organization that strengthens customer trust, supports regulatory requirements, and delivers greater operational efficiency."
+    },
+
+    "advantages": {
+      "security": {
+        "icon": "🛡️",
+        "title": "Enterprise Security & Encryption",
+        "heading": "Security Built on Advanced Technical Expertise",
+        "description": "Infrastructure protected by advanced enterprise network security protocols, specifically designed to handle sensitive data according to high confidentiality and encryption standards.",
+        "link": "Advanced Data Encryption"
+      },
+
+      "compliance": {
+        "icon": "🏛️",
+        "title": "100% Regulatory Compliance 🇸🇦",
+        "heading": "Committed to Local Regulations & Requirements",
+        "description": "Registered to provide call center and business process outsourcing services, with data hosted and retained within locally approved data centers in Saudi Arabia.",
+        "link": "Data Hosted in Saudi Arabia"
+      },
+
+      "saudiTeam": {
+        "icon": "👥",
+        "title": "Qualified Saudi Talent",
+        "heading": "Saudi Team with Direct Operational Oversight",
+        "description": "A team of Saudi professionals trained to high standards in customer service and telesales, supported by continuous field supervision to maintain service quality.",
+        "link": "Dedicated Operational Oversight"
+      },
+
+      "scalability": {
+        "icon": "⚡",
+        "title": "Seamless Scalability",
+        "heading": "Flexible Capacity That Grows With You",
+        "description": "Start with a focused dedicated team and expand your operational seats quickly and smoothly as your business grows, without rebuilding your operations from the ground up.",
+        "link": "Instant Operational Scaling"
+      }
+    },
+
+    "stats": {
+      "hosting": {
+        "value": "100%",
+        "label": "Cloud Hosting in Saudi Arabia"
+      },
+      "availability": {
+        "value": "99.9%",
+        "label": "Service Availability (SLA)"
+      },
+      "commercialRegistration": {
+        "value": "7054811208",
+        "label": "Registered Commercial Number"
+      },
+      "monitoring": {
+        "value": "24/7",
+        "label": "Continuous Operational Monitoring"
+      }
+    },
+
+    "cta": {
+      "title": "Let's Build Your Dedicated Call Center",
+      "description": "Speak with our operations consultants for a customized needs assessment and a fast deployment plan."
+    }
+  },
+
+  "howItWorks": {
+    "hero": {
+      "eyebrow": "Our Proven Partnership & Operations Process",
+      "title": "How It Works",
+      "titleHighlight": "Step by Step Toward Success",
+      "description": "We follow a structured and efficient operational methodology designed to reduce risk and launch your organization's call center with high levels of efficiency and professionalism."
+    },
+
+    "steps": {
+      "step1": {
+        "number": "01",
+        "icon": "📋",
+        "badge": "Needs Assessment",
+        "title": "1. Discovery Session & Requirements Analysis",
+        "description": "We understand your business, expected call volume, quality standards, and target communication channels to determine the right operational capacity.",
+        "outputsTitle": "Key Deliverables",
+        "outputs": [
+          "Define the required team size and operational seats",
+          "Define the scope of work and Service Level Agreement (SLA)",
+          "Select the appropriate voice and written communication channels"
+        ]
+      },
+
+      "step2": {
+        "number": "02",
+        "icon": "⚙️",
+        "badge": "Setup & Integration",
+        "title": "2. Custom Configuration & Team Training",
+        "description": "Develop call scripts, integrate your systems with your CRM, and train the Saudi team dedicated to your account.",
+        "outputsTitle": "Key Deliverables",
+        "outputs": [
+          "Develop customized call guides and scripts",
+          "Seamless integration with your CRM system",
+          "Train and prepare the dedicated operational team"
+        ]
+      },
+
+      "step3": {
+        "number": "03",
+        "icon": "🧪",
+        "badge": "Validation & Quality",
+        "title": "3. Pilot Operation & Performance Measurement",
+        "description": "Launch a defined performance measurement period to validate response quality and resolution speed, with live reporting and adjustments before scaling.",
+        "outputsTitle": "Key Deliverables",
+        "outputs": [
+          "Test cloud infrastructure and call stability",
+          "Provide daily and real-time performance reports",
+          "Optimize response scripts based on feedback"
+        ]
+      },
+
+      "step4": {
+        "number": "04",
+        "icon": "🚀",
+        "badge": "Full Launch",
+        "title": "4. Go-Live & Scaling",
+        "description": "Transition to full production operations with dedicated operational oversight, regular quality reporting, and the ability to increase capacity immediately.",
+        "outputsTitle": "Key Deliverables",
+        "outputs": [
+          "Launch and operate the call center 24/7",
+          "Provide regular analytical reports on policies and quality",
+          "Increase operational capacity with complete flexibility"
+        ]
+      }
+    },
+
+    "cta": {
+      "title": "Ready to Take the First Step?",
+      "description": "Contact us today to book a complimentary discovery session and assess the operational requirements of your business."
+    }
+  },
+
+  "contact": {
+    "title": "Contact Us",
+    "description": "Talk to our team about your organization's call center requirements."
+  }
+}
+

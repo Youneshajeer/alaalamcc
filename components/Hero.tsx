@@ -1,33 +1,61 @@
-import React from 'react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import ar from '@/i18n/ar.json';
+import en from '@/i18n/en.json';
+
+const dictionaries = { ar, en };
 
 export default function Hero() {
+  const [lang, setLang] = useState<'ar' | 'en'>('ar');
+
+  useEffect(() => {
+    const savedLang = (localStorage.getItem('lang') as 'ar' | 'en') || 'ar';
+    setLang(savedLang);
+
+    const checkLangInterval = setInterval(() => {
+      const currentLang = (localStorage.getItem('lang') as 'ar' | 'en') || 'ar';
+      if (currentLang !== lang) {
+        setLang(currentLang);
+      }
+    }, 100);
+
+    return () => clearInterval(checkLangInterval);
+  }, [lang]);
+
+  const t = dictionaries[lang].home.hero;
+  const cta = dictionaries[lang].common.cta;
+  const quickFeatures = dictionaries[lang].home.quickFeatures;
+
   const points = [
     {
-      title: "استضافة داخل السعودية",
-      desc: "بنية سحابية موثوقة بمنطقة الرياض",
-      icon: "🇸🇦",
+      title: quickFeatures.saudiHosting.title,
+      desc: quickFeatures.saudiHosting.description,
+      icon: quickFeatures.saudiHosting.icon,
     },
     {
-      title: "تسجيل نظامي",
-      desc: "مسجّلون لدى الجهة المختصة بخدمات مراكز الاتصال",
-      icon: "📜",
+      title: quickFeatures.registered.title,
+      desc: quickFeatures.registered.description,
+      icon: quickFeatures.registered.icon,
     },
     {
-      title: "قنوات متعددة",
-      desc: "هاتف، واتساب، بريد إلكتروني، ودردشة حية",
-      icon: "💬",
+      title: quickFeatures.multichannel.title,
+      desc: quickFeatures.multichannel.description,
+      icon: quickFeatures.multichannel.icon,
     },
     {
-      title: "سعة مرنة",
-      desc: "من فريق عمل صغير إلى فِرَق موسّعة حسب الحاجة",
-      icon: "📈",
+      title: quickFeatures.flexibleCapacity.title,
+      desc: quickFeatures.flexibleCapacity.description,
+      icon: quickFeatures.flexibleCapacity.icon,
     },
   ];
 
   return (
-    <section id="hero" className="relative pt-6 pb-12 md:pt-16 md:pb-24 overflow-hidden bg-slate-950">
-      
-      {/* نمط الحركة للوميض المتكرر */}
+    <section 
+      id="hero" 
+      className={`relative pt-6 pb-16 md:pt-16 md:pb-24 overflow-hidden bg-slate-950 ${lang === 'ar' ? 'dir-rtl' : 'dir-ltr'}`} 
+      dir={lang === 'ar' ? 'rtl' : 'ltr'}
+    >
       <style>{`
         @keyframes textGlowPulse {
           0%, 100% {
@@ -44,97 +72,89 @@ export default function Hero() {
         }
       `}</style>
 
-      {/* 1. خلفية الصورة (واضحة تماماً وبدون أي طبقة معتمة لتظهر تفاصيل وجه الفتاة بوضوح تام) */}
-      <div className="absolute top-0 inset-x-0 z-0 h-[48vh] sm:h-[62vh] lg:h-full overflow-hidden pointer-events-none">
-        <img
-          src="/images/hero-bg.png"
-          alt="خلفية مركز الاتصال"
-          className="w-full h-full object-cover object-top opacity-100"
-        />
-        {/* تدرج سفلي خفيف لدمج الصورة بسلاسة */}
-        <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-slate-950/80"></div>
-      </div>
-
-      {/* 2. محتوى قسم الهيرو الأساسي */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-6 lg:gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
-          {/* النصوص والعنوان والأزرار */}
-          <div className="w-full lg:col-span-7 flex flex-col justify-between text-center lg:text-right py-2 space-y-4">
+          <div className={`w-full lg:col-span-7 relative rounded-3xl overflow-hidden p-6 sm:p-10 border border-slate-800 bg-slate-900/40 backdrop-blur-md flex flex-col justify-between ${lang === 'ar' ? 'text-center lg:text-right' : 'text-center lg:text-left'} space-y-6 shadow-2xl`}>
             
-            <div className="space-y-3">
-              {/* شارة واضحة وغير فاهية مع خلفية وإطار أقوى */}
+            <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+              <img
+                src="/images/hero-bg.png"
+                alt="خلفية مركز الاتصال"
+                className="w-full h-full object-cover object-top opacity-70"
+              />
+              <div className="absolute inset-0 bg-linear-to-b from-slate-950/80 via-slate-950/60 to-slate-950/95"></div>
+            </div>
+
+            <div className="relative z-10 space-y-4">
               <div className="inline-flex items-center gap-2.5 px-4.5 py-2 rounded-full bg-slate-900/90 border border-emerald-500/60 backdrop-blur-md shadow-lg mx-auto lg:mx-0">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
                 <span className="text-xs sm:text-sm font-extrabold animate-text-pulse tracking-wide text-emerald-300">
-                  مركز اتصال ومقر لخدمات الأعمال (BPO Call Center)
+                  {t.eyebrow}
                 </span>
               </div>
 
-              {/* العنوان الرئيسي: السطر الأول أبيض والثاني تدرج زمردي/سماوي متناسق */}
-             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight">
-  <span className="text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
-    نُشغّل خط التواصل مع عملائك،
-  </span>
-  <br className="hidden sm:inline" />
-  {/* استخدام تدرج البرتقالي مع إضافة حدود سوداء دقيقة وظل عميق للوضوح المطلق */}
-  <span 
-    className="bg-linear-to-r from-amber-400 via-orange-500 to-yellow-400 bg-clip-text text-transparent"
-    style={{
-      WebkitTextStroke: '1px rgba(0, 0, 0, 0.7)',
-      filter: 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.9))'
-    }}
-  >
-    وأنت تركّز على نمو عملك
-  </span>
-</h1>
+              {/* تصغير حجم خط العنوان قليلاً ليرتفع للأعلى فوق رأس الفتاة */}
+              <h1 className={`font-black leading-tight ${lang === 'ar' ? 'text-2xl sm:text-3xl lg:text-4xl' : 'text-xl sm:text-2xl lg:text-3xl'}`}>
+                <span className="text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+                  {t.title}
+                </span>
+                <br className="hidden sm:inline" />
+                <span 
+                  className="bg-linear-to-r from-amber-400 via-orange-500 to-yellow-400 bg-clip-text text-transparent inline-block mt-1"
+                  style={{
+                    WebkitTextStroke: '1px rgba(0, 0, 0, 0.7)',
+                    filter: 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.9))'
+                  }}
+                >
+                  {t.titleHighlight}
+                </span>
+              </h1>
             </div>
 
-            {/* فقرة الوصف بلون مختلف وواضح تماماً (أبيض ناصع مع تدرج فضي وظل عميق لتبرز فوق الخلفية الزرقاء) */}
-            <div className="space-y-4 pt-1">
-              <p className="text-sm sm:text-base leading-relaxed max-w-2xl mx-auto lg:mx-0 font-bold bg-linear-to-r from-white via-slate-10 to-slate-100 bg-clip-text text-transparent drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] mt-8 sm:mt-10">
-                حلول العالم للاتصالات وتقنية المعلومات تبني وتُشغّل مراكز اتصال مخصصة للشركات في السعودية — استقبال، مبيعات هاتفية، دعم فني، وقنوات تواصل مكتوبة، على بنية تحتية مستضافة داخل المملكة.
+            {/* إضافة حاشية فارغة (mt-6) لنزول الوصف قليلاً إلى الأسفل تحت منطقة الرقبة */}
+            <div className="relative z-10 space-y-6 pt-4 mt-6">
+              <p className={`leading-relaxed max-w-2xl mx-auto lg:mx-0 font-bold bg-linear-to-r from-white via-slate-100 to-slate-100 bg-clip-text text-transparent drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] ${lang === 'ar' ? 'text-xs sm:text-sm' : 'text-[11px] sm:text-xs'}`}>
+                {t.description}
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start pt-1">
+              <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
                 <a
                   href="#contact"
-                  className="bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold px-8 py-3 rounded-xl shadow-lg shadow-emerald-500/25 transition-all text-center active:scale-95 text-sm sm:text-base"
+                  className="bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold px-8 py-3.5 rounded-xl shadow-lg shadow-emerald-500/25 transition-all text-center active:scale-95 text-sm sm:text-base whitespace-nowrap"
                 >
-                  اطلب عرض تجريبي
+                  {cta.requestDemo}
                 </a>
                 <a
                   href="#services"
-                  className="bg-slate-900/80 hover:bg-slate-900 text-white border border-slate-700 font-semibold px-8 py-3 rounded-xl backdrop-blur-md transition-all text-center active:scale-95 shadow-md text-sm sm:text-base"
+                  className="bg-slate-900/80 hover:bg-slate-900 text-white border border-slate-700 font-semibold px-8 py-3.5 rounded-xl backdrop-blur-md transition-all text-center active:scale-95 shadow-md text-sm sm:text-base whitespace-nowrap"
                 >
-                  استعرض الخدمات
+                  {cta.viewServices}
                 </a>
               </div>
             </div>
 
           </div>
 
-          {/* قائمة مميزات التشغيل السريع */}
-          <div className="w-full lg:col-span-5 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md p-5 sm:p-7 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 space-y-3.5 mt-8 sm:mt-12 lg:mt-0">
-            <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-800 pb-2.5">
-              مميزات التشغيل السريع:
+          <div className="w-full lg:col-span-5 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md p-5 sm:p-7 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 space-y-3.5">
+            <h3 className={`text-base sm:text-lg font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-800 pb-2.5 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+              {quickFeatures.title}
             </h3>
             
             <div className="space-y-3">
               {points.map((point, idx) => (
                 <div
                   key={idx}
-                  className="flex items-start gap-3 p-3 rounded-2xl bg-emerald-50/90 dark:bg-slate-800/80 border border-emerald-200/80 dark:border-slate-700 text-emerald-950 dark:text-slate-100 transition-all duration-300 hover:bg-sky-500 hover:border-sky-400 hover:text-white hover:scale-[1.02] cursor-pointer group shadow-sm"
+                  className={`flex items-start gap-3 p-3 rounded-2xl bg-emerald-50/90 dark:bg-slate-800/80 border border-emerald-200/80 dark:border-slate-700 text-emerald-950 dark:text-slate-100 transition-all duration-300 hover:bg-sky-500 hover:border-sky-400 hover:text-white hover:scale-[1.02] cursor-pointer group shadow-sm ${lang === 'ar' ? 'text-right' : 'text-left'}`}
                 >
-                  <span className="text-xl sm:text-2xl p-1.5 bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-emerald-100 dark:border-slate-700 group-hover:bg-white/20 group-hover:border-white/30 transition-colors">
+                  <span className="text-xl sm:text-2xl p-1.5 bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-emerald-100 dark:border-slate-700 group-hover:bg-white/20 group-hover:border-white/30 transition-colors shrink-0">
                     {point.icon}
                   </span>
                   <div>
                     <h4 className="font-bold text-xs sm:text-sm text-emerald-900 dark:text-white group-hover:text-white transition-colors">
                       {point.title}
                     </h4>
-                    <p className="text-[11px] sm:text-xs text-emerald-700/90 dark:text-slate-300 group-hover:text-sky-50 transition-colors mt-0.5">
+                    <p className="text-[11px] sm:text-xs text-emerald-700/90 dark:text-slate-300 group-hover:text-sky-50 transition-colors mt-0.5 leading-relaxed">
                       {point.desc}
                     </p>
                   </div>
