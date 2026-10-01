@@ -72,18 +72,28 @@ export default function Hero() {
                 </span>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
-                نُشغّل خط التواصل مع عملائك، <br className="hidden sm:inline" />
-                {/* تدرج برتقالي/أصفر دافئ عالي التباين ليبرز بقوة فوق الخلفية السماوية */}
-                <span className="bg-linear-to-r from-amber-400 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(245,158,11,0.5)]">
-                  وأنت تركّز على نمو عملك
-                </span>
-              </h1>
+              {/* العنوان الرئيسي: السطر الأول أبيض والثاني تدرج زمردي/سماوي متناسق */}
+             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight">
+  <span className="text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+    نُشغّل خط التواصل مع عملائك،
+  </span>
+  <br className="hidden sm:inline" />
+  {/* استخدام تدرج البرتقالي مع إضافة حدود سوداء دقيقة وظل عميق للوضوح المطلق */}
+  <span 
+    className="bg-linear-to-r from-amber-400 via-orange-500 to-yellow-400 bg-clip-text text-transparent"
+    style={{
+      WebkitTextStroke: '1px rgba(0, 0, 0, 0.7)',
+      filter: 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.9))'
+    }}
+  >
+    وأنت تركّز على نمو عملك
+  </span>
+</h1>
             </div>
 
-            {/* تم زيادة الحشو والهامش العلوي للفقرة لتستقر تحت وجه الفتاة بدقة مع نص أبيض نقي وواضحة جداً */}
+            {/* فقرة الوصف بلون مختلف وواضح تماماً (أبيض ناصع مع تدرج فضي وظل عميق لتبرز فوق الخلفية الزرقاء) */}
             <div className="space-y-4 pt-1">
-              <p className="text-sm sm:text-base leading-relaxed max-w-2xl mx-auto lg:mx-0 font-semibold text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)] mt-8 sm:mt-10">
+              <p className="text-sm sm:text-base leading-relaxed max-w-2xl mx-auto lg:mx-0 font-bold bg-linear-to-r from-white via-slate-10 to-slate-100 bg-clip-text text-transparent drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] mt-8 sm:mt-10">
                 حلول العالم للاتصالات وتقنية المعلومات تبني وتُشغّل مراكز اتصال مخصصة للشركات في السعودية — استقبال، مبيعات هاتفية، دعم فني، وقنوات تواصل مكتوبة، على بنية تحتية مستضافة داخل المملكة.
               </p>
 
@@ -96,7 +106,7 @@ export default function Hero() {
                 </a>
                 <a
                   href="#services"
-                  className="bg-white/15 hover:bg-white/25 text-white border border-white/40 font-semibold px-8 py-3 rounded-xl backdrop-blur-md transition-all text-center active:scale-95 shadow-md text-sm sm:text-base"
+                  className="bg-slate-900/80 hover:bg-slate-900 text-white border border-slate-700 font-semibold px-8 py-3 rounded-xl backdrop-blur-md transition-all text-center active:scale-95 shadow-md text-sm sm:text-base"
                 >
                   استعرض الخدمات
                 </a>
