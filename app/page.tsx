@@ -54,7 +54,7 @@ export default function Home() {
               </h2>
               <div className="flex items-center justify-center gap-2 text-xs text-emerald-400 font-medium">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                <span>جاري تحميل المنصة...</span>
+                <span>جاري تحميل ...</span>
               </div>
             </div>
           </div>

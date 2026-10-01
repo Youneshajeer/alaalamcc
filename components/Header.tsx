@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import ThemeToggle from '@/components/ThemeToggle';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -10,7 +9,7 @@ export default function Header() {
   const [lang, setLang] = useState<'ar' | 'en'>('ar');
   const [mounted, setMounted] = useState(false);
 
-  // مزامنة الحالة مع الـ DOM عند التحميل
+  // مزامنة الحالة مع الـ DOM وعند التحميل
   useEffect(() => {
     setMounted(true);
     
@@ -30,6 +29,7 @@ export default function Header() {
     const savedLang = (localStorage.getItem('lang') as 'ar' | 'en') || 'ar';
     setLang(savedLang);
     document.documentElement.dir = savedLang === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.lang = savedLang;
   }, []);
 
   const navLinks = [
@@ -58,7 +58,7 @@ export default function Header() {
     }
   };
 
-  // دالة تبديل اللغة
+  // دالة تبديل اللغة الخاصة بك
   const handleToggleLanguage = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -67,13 +67,17 @@ export default function Header() {
     setLang(nextLang);
     localStorage.setItem('lang', nextLang);
     document.documentElement.dir = nextLang === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.lang = nextLang;
+    
+    // إعادة تحميل الصفحة لتحديث الترجمات البسيطة إن وجدت بسلاسة تامة
+    window.location.reload();
   };
 
   return (
     <header className="sticky top-0 z-50 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         
-        {/* 1. الشعار والهوية الرقمية */}
+        {/* الشعار والهوية الرقمية */}
         <Link href="/" className="flex items-center gap-3.5 group">
           <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-2xl bg-white flex items-center justify-center shadow-md border border-slate-100 p-1 group-hover:scale-105 transition-transform">
             <img 
