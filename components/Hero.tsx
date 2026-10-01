@@ -57,16 +57,18 @@ export default function Hero() {
 
       {/* 2. محتوى قسم الهيرو */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
+        
+        {/* استخدام Flex لضمان الترتيب التلقائي على الموبايل (النصوص أولاً ثم المميزات تحتهما) وعلى الشاشات الكبيرة شبكة متقدمة */}
+        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
           
           {/* العمود الأيمن للنصوص */}
-          <div className="lg:col-span-7 flex flex-col justify-between text-center lg:text-right py-2">
+          <div className="lg:col-span-7 flex flex-col justify-between text-center lg:text-right py-2 space-y-6">
             
             {/* الجزء العلوي: الوسم والعنوان الرئيسي */}
             <div className="space-y-4">
               
               {/* الوسم مع وميض متكرر للجملة بالكامل */}
-              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-emerald-950/40 border border-emerald-500/30 backdrop-blur-md shadow-sm">
+              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-emerald-950/40 border border-emerald-500/30 backdrop-blur-md shadow-sm mx-auto lg:mx-0">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
                 <span className="text-xs sm:text-sm font-extrabold animate-text-pulse tracking-wide">
                   مركز اتصال ومقر لخدمات الأعمال (BPO Call Center)
@@ -83,7 +85,7 @@ export default function Hero() {
             </div>
 
             {/* الجزء السفلي: الفقرة التوضيحية والأزرار */}
-            <div className="space-y-5 pt-4">
+            <div className="space-y-5">
               <p className="text-base sm:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0 font-medium text-white drop-shadow-md">
                 حلول العالم للاتصالات وتقنية المعلومات تبني وتُشغّل مراكز اتصال مخصصة للشركات في السعودية — استقبال، مبيعات هاتفية، دعم فني، وقنوات تواصل مكتوبة، على بنية تحتية مستضافة داخل المملكة.
               </p>
@@ -106,8 +108,8 @@ export default function Hero() {
 
           </div>
 
-          {/* قائمة الميزات */}
-          <div className="lg:col-span-5 bg-white/95 backdrop-blur-md p-6 sm:p-8 rounded-3xl shadow-2xl border border-slate-200 space-y-4">
+          {/* قائمة الميزات (ستظهر تلقائياً تحت قسم النصوص والصورة في الموبايل، وبجانبها في شاشات سطح المكتب) */}
+          <div className="lg:col-span-5 bg-white/95 backdrop-blur-md p-6 sm:p-8 rounded-3xl shadow-2xl border border-slate-200 space-y-4 self-center w-full">
             <h3 className="text-lg font-bold text-slate-900 border-b border-slate-200 pb-3">
               مميزات التشغيل السريع:
             </h3>
