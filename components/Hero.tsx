@@ -51,7 +51,6 @@ export default function Hero() {
           alt="خلفية مركز الاتصال"
           className="w-full h-full object-cover object-center opacity-70"
         />
-        {/* تدرج خفيف جداً من الأطراف فقط للحفاظ على وضوح وجمالية الصورة */}
         <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-950/40 to-transparent"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950/50 via-transparent to-slate-950/70"></div>
       </div>
@@ -59,7 +58,7 @@ export default function Hero() {
       {/* 2. محتوى قسم الهيرو */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* شبكة متجاوبة: flex لترتيب الموبايل (النصوص فوق والميزات تحت الصورة)، و grid للشاشات الكبيرة */}
+        {/* استخدام flex-col في الموبايل لضمان نزول الميزات تحت المحتوى بالكامل وعدم تداخلها مع الصورة */}
         <div className="flex flex-col lg:grid lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
           
           {/* العمود الأيمن للنصوص */}
@@ -107,8 +106,8 @@ export default function Hero() {
 
           </div>
 
-          {/* قائمة الميزات: خلفية باللون الأزرق السماوي وتتحول عند الhover إلى الأخضر القرمزي */}
-          <div className="lg:col-span-5 bg-sky-50/90 dark:bg-sky-950/40 backdrop-blur-md p-6 sm:p-8 rounded-3xl shadow-2xl border border-sky-200/80 space-y-4 self-center w-full">
+          {/* قائمة الميزات (ستظهر بالأسفل في الموبايل، وبجانب النصوص في الشاشات الكبيرة) */}
+          <div className="lg:col-span-5 bg-sky-50/95 dark:bg-sky-950/60 backdrop-blur-md p-6 sm:p-8 rounded-3xl shadow-2xl border border-sky-200/80 space-y-4 self-center w-full z-20">
             <h3 className="text-lg font-bold text-sky-950 dark:text-sky-200 border-b border-sky-200/60 pb-3">
               مميزات التشغيل السريع:
             </h3>
