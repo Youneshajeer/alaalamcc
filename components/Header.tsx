@@ -1,47 +1,227 @@
 'use client';
-import React from 'react';
 
-export default function Navbar() {
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import ThemeToggle from '@/components/ThemeToggle';
+
+export default function Header() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [lang, setLang] = useState<'ar' | 'en'>('ar');
+  const [mounted, setMounted] = useState(false);
+
+  // مزامنة الحالة مع الـ DOM عند التحميل
+  useEffect(() => {
+    setMounted(true);
+    
+    // فحص وضع الدارك مود الحالي في HTML
+    const isDark = document.documentElement.classList.contains('dark') || 
+                   localStorage.getItem('theme') === 'dark';
+    
+    if (isDark) {
+      setIsDarkMode(true);
+      document.documentElement.classList.add('dark');
+    } else {
+      setIsDarkMode(false);
+      document.documentElement.classList.remove('dark');
+    }
+
+    // استرجاع اللغة
+    const savedLang = (localStorage.getItem('lang') as 'ar' | 'en') || 'ar';
+    setLang(savedLang);
+    document.documentElement.dir = savedLang === 'ar' ? 'rtl' : 'ltr';
+  }, []);
+
+  const navLinks = [
+    { name: lang === 'ar' ? 'الرئيسية' : 'Home', href: '/' },
+    { name: lang === 'ar' ? 'خدماتنا' : 'Services', href: '/services' },
+    { name: lang === 'ar' ? 'لماذا نحن' : 'Why Us', href: '/why_us' },
+    { name: lang === 'ar' ? 'آلية العمل' : 'How It Works', href: '/how_it_works' },
+  ];
+
+  // دالة تبديل الدارك مود الفورية
+  const handleToggleDarkMode = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const root = document.documentElement;
+    const hasDark = root.classList.contains('dark');
+    
+    if (hasDark) {
+      root.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+      setIsDarkMode(false);
+    } else {
+      root.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+      setIsDarkMode(true);
+    }
+  };
+
+  // دالة تبديل اللغة
+  const handleToggleLanguage = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const nextLang = lang === 'ar' ? 'en' : 'ar';
+    setLang(nextLang);
+    localStorage.setItem('lang', nextLang);
+    document.documentElement.dir = nextLang === 'ar' ? 'rtl' : 'ltr';
+  };
+
   return (
-    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
+    <header className="sticky top-0 z-50 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         
-        {/* Logo Block */}
-        <div className="flex items-center gap-3">
-          <div className="h-16 w-16 sm:h-20 sm:w-20 rounded-2xl bg-white flex items-center justify-center shadow-md overflow-hidden border border-slate-100 p-1">
-            <div className="flex items-center">
-              <img 
-                src="../images/logo.png" 
-                alt="شعار شركة حلول العالم" 
-                className="h-14 sm:h-16 w-auto object-contain" 
-              />
-            </div>
+        {/* 1. الشعار والهوية الرقمية */}
+        <Link href="/" className="flex items-center gap-3.5 group">
+          <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-2xl bg-white flex items-center justify-center shadow-md border border-slate-100 p-1 group-hover:scale-105 transition-transform">
+            <img 
+              src="/images/logo.png" 
+              alt="شعار شركة حلول العالم" 
+              className="h-10 sm:h-12 w-auto object-contain" 
+            />
           </div>
           <div>
-            <span className="text-xl sm:text-2xl font-extrabold bg-linear-to-r from-blue-700 via-blue-900 to-emerald-600 bg-clip-text text-transparent block leading-none">
-              حلول العالم
+            <span className="text-lg sm:text-xl font-black bg-linear-to-r from-slate-900 via-emerald-800 to-amber-600 dark:from-white dark:via-emerald-400 dark:to-amber-400 bg-clip-text text-transparent block leading-tight">
+              {lang === 'ar' ? 'حلول العالم' : 'Alaalam'}
             </span>
-            <span className="text-xs sm:text-sm text-slate-500 font-medium tracking-wider uppercase mt-1 block">
+            <span className="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 font-bold tracking-wider uppercase block">
               Alaalam Solutions
             </span>
           </div>
-        </div>
+        </Link>
 
-        {/* Navigation Links */}
-        <nav className="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-700">
-          <a href="/" className="hover:text-blue-600 transition-colors">الرئيسية</a>
-          <a href="services" className="hover:text-blue-600 transition-colors">خدماتنا</a>
-          <a href="WhyUs" className="hover:text-blue-600 transition-colors">لماذا نحن</a>
-          <a href="HowItWorks" className="hover:text-blue-600 transition-colors">آلية العمل</a>
+        {/* 2. روابط التنقل الكبيرة (Desktop Navigation) */}
+        <nav className="hidden lg:flex items-center gap-7 text-sm font-bold text-slate-700 dark:text-slate-200">
+          {navLinks.map((link, idx) => (
+            <Link 
+              key={idx} 
+              href={link.href} 
+              className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:right-0 after:w-0 after:h-0.5 after:bg-emerald-500 hover:after:w-full after:transition-all"
+            >
+              {link.name}
+            </Link>
+          ))}
         </nav>
 
-        {/* CTA Button */}
-        <a
-          href="#contact"
-          className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-5 py-2.5 rounded-xl shadow-sm hover:shadow-md transition-all active:scale-95 text-sm"
-        >
-          تواصل معنا
-        </a>
+        {/* 3. الأدوات الرئيسية */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* زر التبديل للدارك مود */}
+          <button
+            type="button"
+            onClick={handleToggleDarkMode}
+            className="p-2.5 rounded-xl cursor-pointer text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 active:scale-90 transition-all select-none"
+            aria-label="تبديل الوضع"
+          >
+            {mounted && isDarkMode ? '☀️' : '🌙'}
+          </button>
+
+          {/* زر تبديل اللغة */}
+          <button
+            type="button"
+            onClick={handleToggleLanguage}
+            className="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-black cursor-pointer text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 active:scale-95 transition-all select-none"
+          >
+            {lang === 'ar' ? 'EN' : 'عربي'}
+          </button>
+
+          {/* أزرار الحساب لسطح المكتب */}
+          <div className="hidden lg:flex items-center gap-3 border-r border-slate-200 dark:border-slate-800 pr-3">
+            <Link 
+              href="/login" 
+              className="text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors px-2 py-1"
+            >
+              {lang === 'ar' ? 'تسجيل دخول' : 'Login'}
+            </Link>
+            <Link 
+              href="/register" 
+              className="text-xs font-bold px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+            >
+              {lang === 'ar' ? 'تسجيل' : 'Register'}
+            </Link>
+            <Link
+              href="#contact"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold px-5 py-2.5 rounded-xl shadow-md text-xs whitespace-nowrap active:scale-95 transition-all"
+            >
+              {lang === 'ar' ? 'تواصل معنا' : 'Contact Us'}
+            </Link>
+          </div>
+
+          {/* زر البرجر للموبايل */}
+          <button
+            type="button"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="lg:hidden p-2.5 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none transition-colors"
+            aria-label="القائمة"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {isMobileMenuOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {/* خلفية معتمة لقائمة الجوال */}
+      {isMobileMenuOpen && (
+        <div 
+          onClick={() => setIsMobileMenuOpen(false)}
+          className="fixed inset-0 top-20 bg-slate-900/40 backdrop-blur-xs lg:hidden z-40 transition-opacity"
+        />
+      )}
+
+      {/* 4. قائمة الجوال المنسدلة */}
+      <div 
+        className={`lg:hidden relative z-50 transition-all duration-300 ease-in-out overflow-hidden bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 shadow-xl ${
+          isMobileMenuOpen ? 'max-h-125 opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
+        }`}
+      >
+        <div className="px-5 pt-4 pb-7 space-y-4">
+          <div className="space-y-1">
+            {navLinks.map((link, idx) => (
+              <Link
+                key={idx}
+                href={link.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex items-center justify-between px-4 py-3 rounded-2xl text-sm font-extrabold text-slate-800 dark:text-slate-100 hover:bg-emerald-50 dark:hover:bg-slate-900 hover:text-emerald-600 dark:hover:text-emerald-400 transition-all"
+              >
+                <span>{link.name}</span>
+                <span className="text-slate-400 text-xs">←</span>
+              </Link>
+            ))}
+          </div>
+
+          <hr className="border-slate-100 dark:border-slate-800/80 my-2" />
+
+          <div className="grid grid-cols-2 gap-3 pt-1">
+            <Link
+              href="/login"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="text-center py-3 text-xs font-black text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-2xl transition-colors"
+            >
+              {lang === 'ar' ? 'تسجيل دخول' : 'Login'}
+            </Link>
+            <Link
+              href="/register"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="text-center py-3 text-xs font-black text-slate-900 dark:text-white bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 rounded-2xl transition-colors"
+            >
+              {lang === 'ar' ? 'إنشاء حساب' : 'Register'}
+            </Link>
+          </div>
+
+          <Link
+            href="#contact"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="block w-full text-center bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-3.5 rounded-2xl shadow-lg shadow-emerald-600/20 text-sm active:scale-95 transition-all"
+          >
+            {lang === 'ar' ? 'تواصل معنا' : 'Contact Us'}
+          </Link>
+        </div>
       </div>
     </header>
   );
