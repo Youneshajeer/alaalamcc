@@ -19,7 +19,7 @@ const dictionary = {
       },
       {
         id: "compliance",
-        icon: "🏛️️",
+        icon: "🏛",
         badge: "امتثال نظامي 100% 🇸🇦",
         title: "التزام كامل بالأنظمة والتشريعات المحلية",
         desc: "مرخصون نظامياً لتقديم خدمات مراكز الاتصال وإسناد الأعمال، مع ضمان استضافة وحفظ كافة البيانات داخل مراكز بيانات معتمدة محلياً في السعودية.",
@@ -45,7 +45,7 @@ const dictionary = {
     enterpriseStats: [
       { number: "100%", label: "استضافة سحابية داخل السعودية", icon: "🇸🇦" },
       { number: "99.9%", label: "جاهزية واستقرار الخدمة (SLA)", icon: "⚡" },
-      { number: "7054811208", label: "السجل التجاري المعتمد", icon: "📜" },
+      { number: "100%", label: "سجل التجاري المعتمد", icon: "📜" },
       { number: "24/7", label: "مراقبة وإشراف تشغيلي مستمر", icon: "🎧" }
     ],
     ctaTitle: "دعنا نُصمّم مركز الاتصال الخـاص بمؤسستك",
@@ -94,7 +94,7 @@ const dictionary = {
     enterpriseStats: [
       { number: "100%", label: "Cloud Hosting in Saudi Arabia", icon: "🇸🇦" },
       { number: "99.9%", label: "Service Availability & SLA", icon: "⚡" },
-      { number: "7054811208", label: "Certified Commercial Register", icon: "📜" },
+      { number: "100%", label: "Certified Commercial Register", icon: "📜" },
       { number: "24/7", label: "Continuous Monitoring & Ops", icon: "🎧" }
     ],
     ctaTitle: "Let Us Design Your Enterprise Call Center",
@@ -125,7 +125,6 @@ export default function WhyUs() {
   return (
     <section id="why-us" className={`py-24 bg-white text-slate-900 relative overflow-hidden ${lang === 'ar' ? 'dir-rtl' : 'dir-ltr'}`} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       
-      <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] bg-size-[24px_24px] opacity-60 pointer-events-none"></div>
       <div className="absolute top-1/4 -right-28 w-125 h-125 bg-emerald-100/40 rounded-full blur-[120px] pointer-events-none"></div>
       <div className="absolute bottom-10 -left-28 w-125 h-125 bg-sky-100/40 rounded-full blur-[120px] pointer-events-none"></div>
 
@@ -210,7 +209,7 @@ export default function WhyUs() {
           </div>
         </div>
 
-=        <div className={`bg-linear-to-r from-slate-900 via-slate-900 to-slate-950 border border-slate-800 text-white rounded-3xl p-8 sm:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+       <div className={`bg-linear-to-r from-slate-900 via-slate-900 to-slate-950 border border-slate-800 text-white rounded-3xl p-8 sm:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
           <div className="space-y-3">
             <h3 className="text-2xl sm:text-3xl font-black">
               {t.ctaTitle}

@@ -77,13 +77,14 @@ export default function Hero() {
           
           <div className={`w-full lg:col-span-7 relative rounded-3xl overflow-hidden p-6 sm:p-10 border border-slate-800 bg-slate-900/40 backdrop-blur-md flex flex-col justify-between ${lang === 'ar' ? 'text-center lg:text-right' : 'text-center lg:text-left'} space-y-6 shadow-2xl`}>
             
+            {/* تم زيادة وضوح الصورة الخلفية وتخفيف طبقة التعتيم للحفاظ على نفس التصميم بوضوح أعلى */}
             <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
               <img
                 src="/images/hero-bg.png"
                 alt="خلفية مركز الاتصال"
-                className="w-full h-full object-cover object-top opacity-70"
+                className="w-full h-full object-cover object-top opacity-90"
               />
-              <div className="absolute inset-0 bg-linear-to-b from-slate-950/80 via-slate-950/60 to-slate-950/95"></div>
+              <div className="absolute inset-0 bg-linear-to-b from-slate-950/50 via-slate-950/30 to-slate-950/80"></div>
             </div>
 
             <div className="relative z-10 space-y-4">
@@ -94,7 +95,6 @@ export default function Hero() {
                 </span>
               </div>
 
-              {/* تصغير حجم خط العنوان قليلاً ليرتفع للأعلى فوق رأس الفتاة */}
               <h1 className={`font-black leading-tight ${lang === 'ar' ? 'text-2xl sm:text-3xl lg:text-4xl' : 'text-xl sm:text-2xl lg:text-3xl'}`}>
                 <span className="text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
                   {t.title}
@@ -112,7 +112,6 @@ export default function Hero() {
               </h1>
             </div>
 
-            {/* إضافة حاشية فارغة (mt-6) لنزول الوصف قليلاً إلى الأسفل تحت منطقة الرقبة */}
             <div className="relative z-10 space-y-6 pt-4 mt-6">
               <p className={`leading-relaxed max-w-2xl mx-auto lg:mx-0 font-bold bg-linear-to-r from-white via-slate-100 to-slate-100 bg-clip-text text-transparent drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] ${lang === 'ar' ? 'text-xs sm:text-sm' : 'text-[11px] sm:text-xs'}`}>
                 {t.description}

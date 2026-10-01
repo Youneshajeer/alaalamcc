@@ -75,7 +75,6 @@ export default function WhyUs() {
       dir={lang === 'ar' ? 'rtl' : 'ltr'}
       className={`py-24 bg-white dark:bg-slate-950 text-slate-900 dark:text-white relative overflow-hidden transition-colors duration-300 ${lang === 'ar' ? 'text-right' : 'text-left'}`}
     >
-      <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] dark:bg-[radial-gradient(#1e293b_1px,transparent_1px)] bg-size-[24px_24px] opacity-60 pointer-events-none"></div>
       <div className="absolute top-1/4 -right-28 w-125 h-125 bg-emerald-100/40 dark:bg-emerald-900/10 rounded-full blur-[120px] pointer-events-none"></div>
       <div className="absolute bottom-10 -left-28 w-125 h-125 bg-sky-100/40 dark:bg-sky-900/10 rounded-full blur-[120px] pointer-events-none"></div>
 

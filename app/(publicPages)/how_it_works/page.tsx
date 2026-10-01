@@ -36,8 +36,7 @@ export default function HowItWorks() {
       className={`py-24 bg-white dark:bg-slate-950 text-slate-900 dark:text-white relative overflow-hidden transition-colors duration-300 ${lang === 'ar' ? 'text-right' : 'text-left'}`}
     >
       
-      <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] dark:bg-[radial-gradient(#1e293b_1px,transparent_1px)] bg-size-[24px_24px] opacity-70 pointer-events-none"></div>
-      <div className="absolute top-1/4 -left-20 w-112.5 h-112.5 bg-emerald-100/50 dark:bg-emerald-900/10 rounded-full blur-[120px] pointer-events-none"></div>
+      {<div className="absolute top-1/4 -left-20 w-112.5 h-112.5 bg-emerald-100/50 dark:bg-emerald-900/10 rounded-full blur-[120px] pointer-events-none"></div>}
       <div className="absolute bottom-10 -right-20 w-112.5 h-112.5 bg-sky-100/50 dark:bg-sky-900/10 rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-20">
