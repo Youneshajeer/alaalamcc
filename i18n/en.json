@@ -377,6 +377,100 @@
   "contact": {
     "title": "Contact Us",
     "description": "Talk to our team about your organization's call center requirements."
-  }
+  },
+  "privacy": {
+  "eyebrow": "Privacy & Security",
+  "title": "Privacy Policy",
+  "lastUpdated": "Last Updated: October 2026",
+  "intro": "At World Business Solutions for IT and Communications, we are committed to protecting your personal and corporate privacy. This policy outlines how we collect, use, and protect your information.",
+  "sections": [
+    {
+      "title": "1. Information Collection",
+      "content": "We collect information you provide directly when registering, requesting a consultation, or contacting us, such as your name, email, phone number, and organization details."
+    },
+    {
+      "title": "2. Use of Data",
+      "content": "We use the collected data to deliver and improve call center services, respond to inquiries, send operational updates, and ensure compliance with regulatory standards within the Kingdom."
+    },
+    {
+      "title": "3. Data Security & Protection",
+      "content": "We implement top-tier encryption and enterprise security protocols to protect your data from unauthorized access, modification, or disclosure, with all data hosted locally in Saudi Arabia."
+    },
+    {
+      "title": "4. User Rights",
+      "content": "You have the right to request access to, correction of, or deletion of your personal data held by us in accordance with applicable laws and regulations in the Kingdom of Saudi Arabia."
+    }
+  ]
+},
+"terms": {
+  "eyebrow": "Terms & Conditions",
+  "title": "Terms of Service",
+  "lastUpdated": "Last Updated: October 2026",
+  "intro": "Welcome to World Business Solutions for IT and Communications. By accessing our website and using our services, you agree to comply with the following terms and conditions.",
+  "sections": [
+    {
+      "title": "1. Acceptance of Terms",
+      "content": "By using our website or contracting with us for call center and outsourcing services, you acknowledge that you have read, understood, and agreed to all terms and conditions herein."
+    },
+    {
+      "title": "2. Scope of Services",
+      "content": "We provide dedicated call center services, cloud operations, technical support, and customer experience management in accordance with signed agreements and Service Level Agreements (SLAs)."
+    },
+    {
+      "title": "3. Client Obligations",
+      "content": "The client agrees to provide accurate and correct information, and not to use the services for any purposes that violate the laws and regulations in the Kingdom of Saudi Arabia."
+    },
+    {
+      "title": "4. Intellectual Property",
+      "content": "All contents, designs, texts, and software on the website are the exclusive property of World Business Solutions and may not be copied or used without prior written permission."
+    }
+  ]
+},
+"acceptableUse": {
+  "eyebrow": "Usage Standards",
+  "title": "Acceptable Use Policy",
+  "lastUpdated": "Last Updated: October 2026",
+  "intro": "This policy outlines the rules and regulations governing the use of World Business Solutions services and website, ensuring a secure and reliable environment for all users.",
+  "sections": [
+    {
+      "title": "1. Lawful Use",
+      "content": "Our services and website must be used solely for lawful purposes in full compliance with all applicable laws and regulations in the Kingdom of Saudi Arabia, avoiding any illegal or fraudulent activities."
+    },
+    {
+      "title": "2. Prohibited Conduct",
+      "content": "It is strictly prohibited to attempt to breach or disrupt network infrastructure, transmit malware, or gain unauthorized access to data systems or call centers belonging to the company or its clients."
+    },
+    {
+      "title": "3. Account Security",
+      "content": "The client is fully responsible for maintaining the confidentiality of their account details and passwords, and must notify us immediately of any unauthorized use or potential security breach."
+    },
+    {
+      "title": "4. Violation Procedures",
+      "content": "The company reserves the right to immediately suspend or terminate services for any user found in violation of this policy, taking necessary legal actions when required."
+    }
+  ]
+},"faq": {
+  "eyebrow": "FAQ",
+  "title": "Answers to Your Key Inquiries",
+  "description": "Learn more about our operational services, security standards, and how to easily build and set up your enterprise call center.",
+  "questions": [
+    {
+      "q": "What core services does World Business Solutions provide?",
+      "a": "We provide comprehensive solutions for managing and operating call centers and business outsourcing, including structural and operational setup, qualified national talents, cloud data hosting inside the Kingdom, and IVR and CRM systems."
+    },
+    {
+      "q": "Is all data hosted and stored within the Kingdom of Saudi Arabia?",
+      "a": "Yes, we are fully committed to local regulations and laws, ensuring that all data hosting and system operations take place within certified and secure data centers in Saudi Arabia."
+    },
+    {
+      "q": "How can I start building a call center for my organization?",
+      "a": "You can contact us directly by booking a consultation session through our website, where our operations consultants will assess your organization's needs and deliver a customized, rapid deployment plan."
+    },
+    {
+      "q": "Do you provide 24/7 technical support and operational supervision?",
+      "a": "Yes, we provide continuous operational monitoring and supervision 24/7 to ensure the highest levels of system stability and service availability (SLA)."
+    }
+  ]
+}
 }
 
