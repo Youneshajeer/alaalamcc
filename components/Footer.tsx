@@ -57,7 +57,10 @@ export default function Footer() {
           
           <p className="flex items-center gap-1.5 flex-wrap">
             <span>📞</span> {lang === 'ar' ? 'الهاتف' : 'Phone'}: 
-            <a href="tel:+966557111069" className="font-mono text-emerald-400 hover:underline" dir="ltr">+966 55 711 1069</a> / 
+            <a href="tel:+966557111069" className="font-mono text-emerald-400 hover:underline" dir="ltr">+966 55 711 1069</a> 
+            </p>
+          <p className="flex items-center gap-1.5 flex-wrap">
+            <span>📞</span> {lang === 'ar' ? 'الهاتف' : 'Phone'}:     
             <a href="tel:+966547938719" className="font-mono text-emerald-400 hover:underline" dir="ltr">+966 54 793 8719</a>
           </p>
 
