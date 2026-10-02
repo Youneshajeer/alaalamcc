@@ -8,7 +8,7 @@ const dictionaries = { ar, en };
 
 export default function Hero() {
   const [lang, setLang] = useState<'ar' | 'en'>('ar');
-  const [currentFeature, setCurrentFeature] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
     const savedLang = (localStorage.getItem('lang') as 'ar' | 'en') || 'ar';
@@ -24,48 +24,73 @@ export default function Hero() {
     return () => clearInterval(checkLangInterval);
   }, [lang]);
 
+  // جلب ترجمة الهيرو ديناميكياً بناءً على اللغة المفعلة حالياً
+  const t: any = dictionaries[lang]?.home?.hero || {};
+  const translatedSlides = t?.slides || [];
+  const cta = dictionaries[lang]?.common?.cta || { requestDemo: 'اطلب عرض خدمة', viewServices: 'استعرض الخدمات' };
+
+  // مصفوفة الشرائح المعتمدة على ملفات الترجمة للغتين العربية والإنجليزية
+  const slides = [
+    {
+      image: '/images/gallery/sa-hosting.png',
+      eyebrow: translatedSlides[0]?.eyebrow || (lang === 'en' ? '100% Saudi Cloud Hosting' : 'استضافة سحابية سعودية 100%'),
+      title: translatedSlides[0]?.title || (lang === 'en' ? 'We run your customer communication, while you focus on growing your business' : 'نُشغّل خط التواصل مع عملائك، وأنت تركّز على نمو عملك'),
+      description: translatedSlides[0]?.description || (lang === 'en' ? 'Alaalam Telecom & IT builds and operates dedicated contact centers in Saudi Arabia.' : 'حلول العالم للاتصالات وتقنية المعلومات تبني وتُشغّل مراكز اتصال مخصصة للشركات في السعودية.'),
+      featureIcon: translatedSlides[0]?.featureIcon || '🏢',
+      featureTitle: translatedSlides[0]?.featureTitle || (lang === 'en' ? 'Saudi Cloud Hosting' : 'استضافة سحابية سعودية'),
+      featureDesc: translatedSlides[0]?.featureDesc || (lang === 'en' ? 'Flexible infrastructure hosted within the Kingdom.' : 'بنية تحتية مرنة ومستضافة داخل المملكة.')
+    },
+    {
+      image: '/images/gallery/callCenterRegistration.png',
+      eyebrow: translatedSlides[1]?.eyebrow || (lang === 'en' ? 'Compliant & Registered' : 'تسجيل نظامي ومعتمد'),
+      title: translatedSlides[1]?.title || (lang === 'en' ? 'Integrated infrastructure for professional contact centers' : 'بنية تحتية متكاملة لمراكز الاتصال الاحترافية'),
+      description: translatedSlides[1]?.description || (lang === 'en' ? 'We enable your company to provide exceptional communication services.' : 'نمكن شركتك من تقديم خدمات اتصال استثنائية وفق أعلى المعايير.'),
+      featureIcon: translatedSlides[1]?.featureIcon || '📜',
+      featureTitle: translatedSlides[1]?.featureTitle || (lang === 'en' ? 'Registered & Compliant' : 'تسجيل نظامي ومعتمد'),
+      featureDesc: translatedSlides[1]?.featureDesc || (lang === 'en' ? 'Full compliance with regulatory requirements.' : 'توافق تام مع المتطلبات التنظيمية لقطاع الاتصالات.')
+    },
+    {
+      image: '/images/gallery/watsapp-calls.png',
+      eyebrow: translatedSlides[2]?.eyebrow || (lang === 'en' ? 'Multi-Channel Communication' : 'قنوات تواصل متعددة'),
+      title: translatedSlides[2]?.title || (lang === 'en' ? 'Smart interactive management via phone and written chat' : 'إدارة تفاعلية ذكية عبر الهاتف والاتصال المكتوب'),
+      description: translatedSlides[2]?.description || (lang === 'en' ? 'Connect with your customers seamlessly through multiple channels.' : 'تواصل مع عملائك بسلاسة عبر قنوات متعددة تشمل المكالمات والواتساب.'),
+      featureIcon: translatedSlides[2]?.featureIcon || '💬',
+      featureTitle: translatedSlides[2]?.featureTitle || (lang === 'en' ? 'Multi-Channel' : 'قنوات تواصل متعددة'),
+      featureDesc: translatedSlides[2]?.featureDesc || (lang === 'en' ? 'Manage calls and live chat from a single platform.' : 'إدارة المكالمات والدردشة من منصة مركزية.')
+    },
+    {
+      image: '/images/gallery/team.png',
+      eyebrow: translatedSlides[3]?.eyebrow || (lang === 'en' ? 'Flexible Capacity & Qualified Teams' : 'سعة مرنة وطاقات مؤهلة'),
+      title: translatedSlides[3]?.title || (lang === 'en' ? 'Professional teams managed efficiently to meet your needs' : 'فرق عمل احترافية تدار بكفاءة عالية لتلبية احتياجاتك'),
+      description: translatedSlides[3]?.description || (lang === 'en' ? 'We provide you with the necessary staff and systems.' : 'نوفر لك الكوادر والأنظمة اللازمة لإدارة تفاعلات العملاء بكفاءة مرنة.'),
+      featureIcon: translatedSlides[3]?.featureIcon || '👥',
+      featureTitle: translatedSlides[3]?.featureTitle || (lang === 'en' ? 'Flexible Capacity' : 'سعة مرنة وطاقات مؤهلة'),
+      featureDesc: translatedSlides[3]?.featureDesc || (lang === 'en' ? 'Workforce that scales effortlessly with your business.' : 'كوادر احترافية تتوسع بسهولة لتناسب حجم أعمالك.')
+    }
+  ];
+
+  // التبديل التلقائي للشرائح كل 6 ثوانٍ
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentFeature((prev) => (prev + 1) % 4);
-    }, 4000);
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 6000);
     return () => clearInterval(timer);
-  }, []);
+  }, [slides.length]);
 
-  const t = dictionaries[lang].home.hero;
-  const cta = dictionaries[lang].common.cta;
-  const quickFeatures = dictionaries[lang].home.quickFeatures;
+  const handleNext = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
 
-  const points = [
-    {
-      title: quickFeatures.saudiHosting.title,
-      desc: quickFeatures.saudiHosting.description,
-      icon: quickFeatures.saudiHosting.icon,
-      image: '/images/gallery/sa-hosting.png',
-    },
-    {
-      title: quickFeatures.registered.title,
-      desc: quickFeatures.registered.description,
-      icon: quickFeatures.registered.icon,
-      image: '/images/gallery/callCenterRegistration.png',
-    },
-    {
-      title: quickFeatures.multichannel.title,
-      desc: quickFeatures.multichannel.description,
-      icon: quickFeatures.multichannel.icon,
-      image: '/images/gallery/watsapp-calls.png',
-    },
-    {
-      title: quickFeatures.flexibleCapacity.title,
-      desc: quickFeatures.flexibleCapacity.description,
-      icon: quickFeatures.flexibleCapacity.icon,
-      image: '/images/gallery/team.png',
-    },
-  ];
+  const handlePrev = () => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
+  const activeSlide = slides[currentSlide] || slides[0];
 
   return (
     <section 
       id="hero" 
-      className={`relative pt-6 pb-16 md:pt-16 md:pb-24 overflow-hidden bg-slate-950 ${lang === 'ar' ? 'dir-rtl' : 'dir-ltr'}`} 
+      className={`relative w-full h-screen min-h-187.5 overflow-hidden bg-slate-950 flex items-center justify-center ${lang === 'ar' ? 'dir-rtl' : 'dir-ltr'}`} 
       dir={lang === 'ar' ? 'rtl' : 'ltr'}
     >
       <style>{`
@@ -82,124 +107,135 @@ export default function Hero() {
         .animate-text-pulse {
           animation: textGlowPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
+        @keyframes fadeInScale {
+          from {
+            opacity: 0;
+            transform: scale(1.03) translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+          }
+        }
+        .animate-fade-in {
+          animation: fadeInScale 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
       `}</style>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+      {/* خلفيات الصور المتغيرة بملء الشاشة */}
+      {slides.map((slide, idx) => (
+        <div
+          key={idx}
+          className={`absolute inset-0 transition-all duration-1000 ease-in-out ${
+            idx === currentSlide ? 'opacity-100 scale-100 z-10' : 'opacity-0 scale-105 pointer-events-none z-0'
+          }`}
+        >
+          <img
+            src={slide.image}
+            alt="صورة العرض التفاعلي"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-linear-to-b from-slate-950/85 via-slate-950/50 to-slate-950/95"></div>
+        </div>
+      ))}
+
+      {/* أزرار التنقل الجانبية */}
+      <button
+        onClick={handlePrev}
+        className="absolute left-4 sm:left-8 top-[50%] -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-blue-600/80 hover:bg-blue-600 text-white flex items-center justify-center shadow-2xl backdrop-blur-md transition-all active:scale-95 group cursor-pointer"
+        aria-label="Previous Slide"
+      >
+        <svg className="w-6 h-6 rtl:rotate-180 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+
+      <button
+        onClick={handleNext}
+        className="absolute right-4 sm:right-8 top-[50%] -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-blue-600/80 hover:bg-blue-600 text-white flex items-center justify-center shadow-2xl backdrop-blur-md transition-all active:scale-95 group cursor-pointer"
+        aria-label="Next Slide"
+      >
+        <svg className="w-6 h-6 rtl:rotate-180 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+
+      {/* المحتوى الرئيسي للـ Hero */}
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-25 w-full h-full flex flex-col justify-between py-12">
+        
+        {/* قسم ميزات التشغيل في أعلى الشاشة (فوق الصور والنصوص) */}
+        <div className="w-full max-w-3xl mx-auto bg-slate-950/60 backdrop-blur-xl border border-slate-800/80 px-6 py-3.5 rounded-2xl shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-4 mt-6">
           
-          <div className={`w-full lg:col-span-7 relative rounded-3xl overflow-hidden p-6 sm:p-10 border border-slate-800 bg-slate-900/40 backdrop-blur-md flex flex-col justify-between ${lang === 'ar' ? 'text-center lg:text-right' : 'text-center lg:text-left'} space-y-6 shadow-2xl`}>
-            
-            <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-              <img
-                src="/images/hero-bg.png"
-                alt="خلفية مركز الاتصال"
-                className="w-full h-full object-cover object-top opacity-90"
-              />
-              <div className="absolute inset-0 bg-linear-to-b from-slate-950/50 via-slate-950/30 to-slate-950/80"></div>
-            </div>
-
-            <div className="relative z-10 space-y-4">
-              <div className="inline-flex items-center gap-2.5 px-4.5 py-2 rounded-full bg-slate-900/90 border border-emerald-500/60 backdrop-blur-md shadow-lg mx-auto lg:mx-0">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
-                <span className="text-xs sm:text-sm font-extrabold animate-text-pulse tracking-wide text-emerald-300">
-                  {t.eyebrow}
-                </span>
-              </div>
-
-              <h1 className={`font-black leading-tight ${lang === 'ar' ? 'text-2xl sm:text-3xl lg:text-4xl' : 'text-xl sm:text-2xl lg:text-3xl'}`}>
-                <span className="text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
-                  {t.title}
-                </span>
-                <br className="hidden sm:inline" />
-                <span 
-                  className="bg-linear-to-r text-green-400 bg-clip-text inline-block mt-1"
-                  style={{
-                    WebkitTextStroke: '1px rgba(0, 0, 0, 0.7)',
-                    filter: 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.9))'
-                  }}
-                >
-                  {t.titleHighlight}
-                </span>
-              </h1>
-            </div>
-
-            <div className="relative z-10 space-y-6 pt-4 mt-6">
-              <p className={`leading-relaxed max-w-2xl mx-auto lg:mx-0 font-bold bg-linear-to-r from-white via-slate-100 to-slate-100 bg-clip-text text-transparent drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] ${lang === 'ar' ? 'text-xs sm:text-sm' : 'text-[11px] sm:text-xs'}`}>
-                {t.description}
+          <div className={`flex items-center gap-3.5 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+            <span className="text-xl sm:text-2xl p-2 bg-slate-900/90 rounded-xl shadow-inner border border-slate-700 shrink-0 text-emerald-400">
+              {activeSlide.featureIcon}
+            </span>
+            <div>
+              <h4 className="font-bold text-xs sm:text-sm text-white">
+                {activeSlide.featureTitle}
+              </h4>
+              <p className="text-[11px] sm:text-xs text-slate-300 mt-0.5 leading-relaxed">
+                {activeSlide.featureDesc}
               </p>
-
-              <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
-                <a
-                  href="/contact"
-                  className="bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold px-8 py-3.5 rounded-xl shadow-lg shadow-emerald-500/25 transition-all text-center active:scale-95 text-sm sm:text-base whitespace-nowrap"
-                >
-                  {cta.requestDemo}
-                </a>
-                <a
-                  href="#services"
-                  className="bg-slate-900/80 hover:bg-slate-900 text-white border border-slate-700 font-semibold px-8 py-3.5 rounded-xl backdrop-blur-md transition-all text-center active:scale-95 shadow-md text-sm sm:text-base whitespace-nowrap"
-                >
-                  {cta.viewServices}
-                </a>
-              </div>
             </div>
-
           </div>
 
-          <div className="w-full lg:col-span-5 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md p-5 sm:p-6 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between space-y-4">
-            
-            <div className="border-b border-slate-200 dark:border-slate-800 pb-2.5">
-              <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
-                {quickFeatures.title}
-              </h3>
-            </div>
-            
-            <div className="relative rounded-2xl overflow-hidden grow flex flex-col justify-between p-6 shadow-inner border border-slate-200/60 dark:border-slate-700/60 group min-h-80">
-              
-              <div className="absolute inset-0 z-0">
-                <img
-                  src={points[currentFeature].image}
-                  alt={points[currentFeature].title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-100"
-                />
-                {/* طبقة تدرج خفيفة جداً في الأعلى فقط لضمان قراءة النصوص بوضوح دون التأثير على إشراق ووضوح الصورة */}
-                <div className="absolute inset-0 bg-linear-to-b from-slate-950/60 via-slate-950/20 to-transparent"></div>
-              </div>
-
-              <div className={`relative z-10 space-y-2.5 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
-                <div className="inline-flex items-center gap-2">
-                  <span className="text-xl sm:text-2xl p-1.5 bg-white/90 dark:bg-slate-900/90 rounded-xl shadow-sm border border-emerald-100 dark:border-slate-700">
-                    {points[currentFeature].icon}
-                  </span>
-                  <h4 className="font-bold text-sm sm:text-base text-white drop-shadow-md">
-                    {points[currentFeature].title}
-                  </h4>
-                </div>
-
-                <p className="text-xs sm:text-sm text-slate-100 font-medium leading-relaxed drop-shadow">
-                  {points[currentFeature].desc}
-                </p>
-              </div>
-
-              <div className="relative z-10 flex items-center justify-center gap-1.5 pt-3 border-t border-white/10 mt-4">
-                {points.map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setCurrentFeature(idx)}
-                    className={`h-1.5 rounded-full transition-all duration-300 ${
-                      idx === currentFeature ? 'w-6 bg-blue-400' : 'w-1.5 bg-white/40 hover:bg-white/70'
-                    }`}
-                    aria-label={`Slide ${idx + 1}`}
-                  />
-                ))}
-              </div>
-
-            </div>
-
+          {/* مؤشرات النقاط */}
+          <div className="flex items-center gap-2 shrink-0">
+            {slides.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentSlide(idx)}
+                className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                  idx === currentSlide ? 'w-8 bg-blue-500 shadow-lg shadow-blue-500/50' : 'w-2 bg-white/40 hover:bg-white/70'
+                }`}
+                aria-label={`Slide ${idx + 1}`}
+              />
+            ))}
           </div>
 
         </div>
+
+        {/* النصوص الوسطى المتغيرة */}
+        <div key={currentSlide} className="space-y-5 animate-fade-in max-w-4xl mx-auto text-center my-auto">
+          
+          <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-slate-900/80 border border-emerald-500/60 backdrop-blur-md shadow-xl mx-auto">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+            <span className="text-xs sm:text-sm font-extrabold animate-text-pulse tracking-wide text-emerald-300">
+              {activeSlide.eyebrow}
+            </span>
+          </div>
+
+          <h1 className={`font-black leading-tight text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)] ${lang === 'ar' ? 'text-2xl sm:text-4xl lg:text-5xl' : 'text-xl sm:text-3xl lg:text-4xl'}`}>
+            {activeSlide.title}
+          </h1>
+
+          <p className="leading-relaxed max-w-3xl mx-auto font-medium text-slate-200 text-sm sm:text-base lg:text-lg drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
+            {activeSlide.description}
+          </p>
+
+          <div className="flex flex-wrap gap-4 justify-center pt-2">
+            <a
+              href="/contact"
+              className="bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold px-8 py-3.5 rounded-xl shadow-lg shadow-emerald-500/30 transition-all active:scale-95 text-sm sm:text-base whitespace-nowrap"
+            >
+              {cta.requestDemo}
+            </a>
+            <a
+              href="#services"
+              className="bg-slate-900/80 hover:bg-slate-900 text-white border border-slate-700 font-semibold px-8 py-3.5 rounded-xl backdrop-blur-md transition-all active:scale-95 shadow-md text-sm sm:text-base whitespace-nowrap"
+            >
+              {cta.viewServices}
+            </a>
+          </div>
+
+        </div>
+
+        {/* مساحة فارغة سفلية للموازنة */}
+        <div></div>
+
       </div>
+
     </section>
   );
 }

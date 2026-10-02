@@ -607,5 +607,43 @@
   "submitBtn": "Submit Call-back Request",
   "successTitle": "Request Submitted Successfully",
   "successDesc": "Thank you! Your request has been received and our team will contact you soon."
-}
+},
+"slides": [
+  {
+    "image": "/images/gallery/sa-hosting.png",
+    "eyebrow": "100% Saudi Cloud Hosting",
+    "title": "We run your customer communication, while you focus on growing your business",
+    "description": "Alaalam Telecom & IT builds and operates dedicated contact centers for companies in Saudi Arabia — inbound, telemarketing, technical support, and written communication channels, on infrastructure hosted within the Kingdom.",
+    "featureIcon": "🏢",
+    "featureTitle": "Saudi Cloud Hosting",
+    "featureDesc": "Flexible infrastructure hosted within the Kingdom ensuring high reliability and security."
+  },
+  {
+    "image": "/images/gallery/callCenterRegistration.png",
+    "eyebrow": "Compliant & Registered",
+    "title": "Integrated infrastructure for professional contact centers",
+    "description": "We enable your company to provide exceptional communication services in accordance with the highest regulatory and local standards approved in the Kingdom of Saudi Arabia.",
+    "featureIcon": "📜",
+    "featureTitle": "Registered & Compliant",
+    "featureDesc": "Full compliance with regulatory requirements for the telecom and IT sector."
+  },
+  {
+    "image": "/images/gallery/watsapp-calls.png",
+    "eyebrow": "Multi-Channel Communication",
+    "title": "Smart interactive management via phone and written chat",
+    "description": "Connect with your customers seamlessly through multiple channels including calls, WhatsApp, and live chat, ensuring immediate response and high service quality.",
+    "featureIcon": "💬",
+    "featureTitle": "Multi-Channel",
+    "featureDesc": "Manage calls, WhatsApp, and live chat seamlessly from a single unified platform."
+  },
+  {
+    "image": "/images/gallery/team.png",
+    "eyebrow": "Flexible Capacity & Qualified Teams",
+    "title": "Professional teams managed efficiently to meet your needs",
+    "description": "We free up your energy and provide you with the necessary staff and systems to manage customer interactions with flexible efficiency that suits your fast business growth.",
+    "featureIcon": "👥",
+    "featureTitle": "Flexible Capacity",
+    "featureDesc": "Professional workforce and operational capacity that scales effortlessly with your business."
+  }
+]
 }
