@@ -473,30 +473,41 @@
   ]
 },
 "contactUs": {
-  "eyebrow": "Get in Touch",
-  "title": "We Are Here to Support Your Growth",
-  "description": "Connect with our expert team and operations consultants to discuss your call center needs or request advanced automation solutions.",
+  "eyebrow": "Verified Communication Channels",
+  "title": "We Are Here to Support & Grow Your Business 24/7",
+  "description": "Our operational team and experts in IT and telecom are ready to answer your inquiries and deliver customized solutions for your enterprise with utmost professionalism and speed around the clock.",
+  "speedBadge": "Customer service and technical support available 24/7",
+  "info": {
+    "title": "Contact Details & Locations",
+    "address": "2457 Yahya Bin Waqid Al-Taei Street - Al-Manar District - Jeddah - Kingdom of Saudi Arabia",
+    "generalEmailTitle": "General Email",
+    "generalEmailVal": "info@alaalamcc.com",
+    "salesEmailTitle": "Sales",
+    "salesEmailVal": "sales@alaalamcc.com",
+    "supportEmailTitle": "Technical Support",
+    "supportEmailVal": "support@alaalamcc.com",
+    "phone1": "+966 55 711 1069",
+    "phone2": "+966 54 793 8719",
+    "hours": "Working Hours: Available 24 hours a day",
+    "supportNote": "We strive to respond to all inquiries and requests received via email and phone as quickly as possible to ensure your business continuity with high efficiency at all times."
+  }
+},
+"careers": {
+  "eyebrow": "Join Our Team",
+  "title": "Submit Your CV",
+  "description": "We are always looking for qualified national talents to join our operational call center and tech ecosystem.",
   "form": {
     "name": "Full Name",
     "namePlaceholder": "Enter your full name",
     "email": "Email Address",
-    "emailPlaceholder": "name@company.com",
+    "emailPlaceholder": "name@domain.com",
     "phone": "Phone Number",
     "phonePlaceholder": "05XXXXXXXX",
-    "message": "Message or Inquiry",
-    "messagePlaceholder": "Write your project details or inquiry here...",
-    "submit": "Send Message",
-    "success": "Thank you! Your message has been sent successfully, and we will contact you soon."
-  },
-  "info": {
-    "title": "Contact Information",
-    "address": "Kingdom of Saudi Arabia - Riyadh",
-    "emailTitle": "Email Address",
-    "emailVal": "info@alaalamcc.com",
-    "phoneTitle": "Support Phone",
-    "phoneVal": "+966 55 711 1069",
-    "hours": "Working Hours: 24/7"
+    "position": "Target Position",
+    "positionPlaceholder": "e.g., Customer Service Agent / Tech Specialist",
+    "cvFile": "CV / Resume (PDF Only)",
+    "submit": "Submit Application",
+    "success": "Thank you! Your CV has been successfully submitted and our HR team will contact you if shortlisted."
   }
 }
 }
-

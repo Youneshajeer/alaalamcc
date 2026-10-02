@@ -10,13 +10,6 @@ const dictionaries = { ar, en };
 
 export default function ContactPage() {
   const [lang, setLang] = useState<'ar' | 'en'>('ar');
-  const [submitted, setSubmitted] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: ''
-  });
 
   useEffect(() => {
     const savedLang = (localStorage.getItem('lang') as 'ar' | 'en') || 'ar';
@@ -34,16 +27,12 @@ export default function ContactPage() {
 
   const t = dictionaries[lang].contactUs;
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
-
   return (
     <div className={`min-h-screen flex flex-col justify-between bg-white dark:bg-slate-950 text-slate-900 dark:text-white transition-colors duration-300 ${lang === 'ar' ? 'dir-rtl' : 'dir-ltr'}`} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
 
-      <main className="grow py-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto w-full space-y-16">
+      <main className="grow py-16 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto w-full space-y-16">
         
+        {/* رأس الصفحة */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
           <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-emerald-50 dark:bg-slate-900 border border-emerald-200/80 dark:border-emerald-500/30 text-emerald-800 dark:text-emerald-300 text-xs sm:text-sm font-bold shadow-sm">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
@@ -57,129 +46,121 @@ export default function ContactPage() {
           <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
             {t.description}
           </p>
+
+          <div className="pt-2">
+            <span className="inline-block text-xs sm:text-sm text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-4 py-2 rounded-xl border border-emerald-200/60 dark:border-emerald-800/50 font-medium">
+              ⚡ {t.speedBadge}
+            </span>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        {/* بطاقات معلومات الاتصال الاحترافية */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
           
-          <div className="lg:col-span-7 bg-slate-50/50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-10 shadow-sm">
-            {submitted ? (
-              <div className="py-12 text-center space-y-4">
-                <div className="w-16 h-16 bg-emerald-500 text-white rounded-full flex items-center justify-center text-3xl mx-auto shadow-lg">
-                  ✓
-                </div>
-                <h3 className="text-xl font-bold text-slate-900 dark:text-white">تم الإرسال بنجاح</h3>
-                <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300">
-                  {t.form.success}
-                </p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="space-y-2">
-                  <label className="block text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300">
-                    {t.form.name}
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    placeholder={t.form.namePlaceholder}
-                    value={formData.name}
-                    onChange={(e) => setFormData({...formData, name: e.target.value})}
-                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
-                  />
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="block text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300">
-                      {t.form.email}
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      placeholder={t.form.emailPlaceholder}
-                      value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="block text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300">
-                      {t.form.phone}
-                    </label>
-                    <input
-                      type="tel"
-                      required
-                      placeholder={t.form.phonePlaceholder}
-                      value={formData.phone}
-                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                      className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="block text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300">
-                    {t.form.message}
-                  </label>
-                  <textarea
-                    rows={4}
-                    required
-                    placeholder={t.form.messagePlaceholder}
-                    value={formData.message}
-                    onChange={(e) => setFormData({...formData, message: e.target.value})}
-                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all resize-none"
-                  ></textarea>
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full py-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm sm:text-base shadow-lg shadow-emerald-600/20 transition-all duration-300"
-                >
-                  {t.form.submit}
-                </button>
-              </form>
-            )}
-          </div>
-
-          <div className="lg:col-span-5 space-y-6">
-            <div className="bg-slate-50/50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm">
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+          {/* بطاقة معلومات التواصل الأساسية */}
+          <div className="bg-slate-50/50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 space-y-6 shadow-sm flex flex-col justify-between">
+            <div className="space-y-6">
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white pb-2 border-b border-slate-200 dark:border-slate-800">
                 {t.info.title}
               </h3>
 
-              <div className="space-y-4 text-sm sm:text-base text-slate-600 dark:text-slate-300">
-                <div className="flex items-start gap-3">
-                  <span className="text-emerald-500 text-xl font-bold">📍</span>
+              <div className="space-y-5 text-sm sm:text-base text-slate-600 dark:text-slate-300">
+                
+                {/* العنوان */}
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-slate-800 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0 text-lg shadow-sm">
+                    📍
+                  </div>
                   <div>
-                    <strong className="block text-slate-900 dark:text-white">العنوان</strong>
-                    {t.info.address}
+                    <strong className="block text-slate-900 dark:text-white mb-0.5">{lang === 'ar' ? 'العنوان' : 'Address'}</strong>
+                    <span className="leading-relaxed">{t.info.address}</span>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3">
-                  <span className="text-emerald-500 text-xl font-bold">✉️</span>
+                {/* الهواتف */}
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-slate-800 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0 text-lg shadow-sm">
+                    📞
+                  </div>
                   <div>
-                    <strong className="block text-slate-900 dark:text-white">{t.info.emailTitle}</strong>
-                    {t.info.emailVal}
+                    <strong className="block text-slate-900 dark:text-white mb-0.5">{lang === 'ar' ? 'الهاتف' : 'Phone'}</strong>
+                    <div className="flex flex-col gap-1 font-medium dir-ltr text-right">
+                      <a href={`tel:${t.info.phone1}`} className="hover:text-emerald-600 transition-colors">
+                        {t.info.phone1}
+                      </a>
+                      <a href={`tel:${t.info.phone2}`} className="hover:text-emerald-600 transition-colors">
+                        {t.info.phone2}
+                      </a>
+                    </div>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3">
-                  <span className="text-emerald-500 text-xl font-bold">📞</span>
+                {/* البريد العام */}
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-slate-800 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0 text-lg shadow-sm">
+                    ✉️️
+                  </div>
                   <div>
-                    <strong className="block text-slate-900 dark:text-white">{t.info.phoneTitle}</strong>
-                    {t.info.phoneVal}
+                    <strong className="block text-slate-900 dark:text-white mb-0.5">{t.info.generalEmailTitle}</strong>
+                    <a href={`mailto:${t.info.generalEmailVal}`} className="hover:text-emerald-600 transition-colors font-medium">
+                      {t.info.generalEmailVal}
+                    </a>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3 pt-2 border-t border-slate-200 dark:border-slate-800">
-                  <span className="text-emerald-500 text-xl font-bold">⏰</span>
-                  <div className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-                    {t.info.hours}
+                {/* المبيعات */}
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-slate-800 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0 text-lg shadow-sm">
+                    💼
+                  </div>
+                  <div>
+                    <strong className="block text-slate-900 dark:text-white mb-0.5">{t.info.salesEmailTitle}</strong>
+                    <a href={`mailto:${t.info.salesEmailVal}`} className="hover:text-emerald-600 transition-colors font-medium">
+                      {t.info.salesEmailVal}
+                    </a>
                   </div>
                 </div>
+
+                {/* الدعم الفني */}
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-slate-800 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0 text-lg shadow-sm">
+                    🛠️
+                  </div>
+                  <div>
+                    <strong className="block text-slate-900 dark:text-white mb-0.5">{t.info.supportEmailTitle}</strong>
+                    <a href={`mailto:${t.info.supportEmailVal}`} className="hover:text-emerald-600 transition-colors font-medium">
+                      {t.info.supportEmailVal}
+                    </a>
+                  </div>
+                </div>
+
               </div>
+            </div>
+
+            <div className="pt-4 mt-4 border-t border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-emerald-700 dark:text-emerald-400 font-semibold">
+              🕒 {t.info.hours}
+            </div>
+          </div>
+
+          {/* بطاقة الدعم والالتزام التشغيلي */}
+          <div className="bg-emerald-900 text-white rounded-3xl p-8 space-y-6 shadow-md flex flex-col justify-between relative overflow-hidden">
+            <div className="absolute -right-10 -bottom-10 w-40 h-40 bg-emerald-800/40 rounded-full blur-2xl pointer-events-none"></div>
+
+            <div className="space-y-6 relative z-10">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-800 flex items-center justify-center text-2xl shadow-inner">
+                🛡️
+              </div>
+              <h3 className="text-xl font-bold tracking-tight">
+                {lang === 'ar' ? 'التزام مؤسسي ودعم 24/7' : 'Institutional Commitment & 24/7 Support'}
+              </h3>
+              <p className="text-sm sm:text-base text-emerald-100 leading-relaxed font-normal">
+                {t.info.supportNote}
+              </p>
+            </div>
+
+            <div className="pt-6 border-t border-emerald-800/80 relative z-10 flex items-center justify-between text-xs sm:text-sm text-emerald-200">
+              <span>{lang === 'ar' ? 'حلول العالم للاتصالات وتقنية المعلومات' : 'World Business Solutions'}</span>
+              <span className="font-bold">alaalamcc.com</span>
             </div>
           </div>
 
@@ -187,6 +168,7 @@ export default function ContactPage() {
 
       </main>
 
+      <Footer />
     </div>
   );
 }
