@@ -471,6 +471,32 @@
       "a": "Yes, we provide continuous operational monitoring and supervision 24/7 to ensure the highest levels of system stability and service availability (SLA)."
     }
   ]
+},
+"contactUs": {
+  "eyebrow": "Get in Touch",
+  "title": "We Are Here to Support Your Growth",
+  "description": "Connect with our expert team and operations consultants to discuss your call center needs or request advanced automation solutions.",
+  "form": {
+    "name": "Full Name",
+    "namePlaceholder": "Enter your full name",
+    "email": "Email Address",
+    "emailPlaceholder": "name@company.com",
+    "phone": "Phone Number",
+    "phonePlaceholder": "05XXXXXXXX",
+    "message": "Message or Inquiry",
+    "messagePlaceholder": "Write your project details or inquiry here...",
+    "submit": "Send Message",
+    "success": "Thank you! Your message has been sent successfully, and we will contact you soon."
+  },
+  "info": {
+    "title": "Contact Information",
+    "address": "Kingdom of Saudi Arabia - Riyadh",
+    "emailTitle": "Email Address",
+    "emailVal": "info@alaalamcc.com",
+    "phoneTitle": "Support Phone",
+    "phoneVal": "+966 55 711 1069",
+    "hours": "Working Hours: 24/7"
+  }
 }
 }
 

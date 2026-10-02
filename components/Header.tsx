@@ -35,6 +35,8 @@ export default function Header() {
     { name: lang === 'ar' ? 'خدماتنا' : 'Services', href: '/services' },
     { name: lang === 'ar' ? 'لماذا نحن' : 'Why Us', href: '/why_us' },
     { name: lang === 'ar' ? 'آلية العمل' : 'How It Works', href: '/how_it_works' },
+    { name: lang === 'ar' ? 'الوظائف' : 'Careers', href: '/careers' },
+
   ];
 
   const handleToggleDarkMode = (e: React.MouseEvent) => {
@@ -134,7 +136,7 @@ export default function Header() {
               {lang === 'ar' ? 'تسجيل' : 'Register'}
             </Link>
             <Link
-              href="#contact"
+              href="/contact"
               className="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold px-5 py-2.5 rounded-xl shadow-md text-xs whitespace-nowrap active:scale-95 transition-all"
             >
               {lang === 'ar' ? 'تواصل معنا' : 'Contact Us'}
@@ -205,7 +207,7 @@ export default function Header() {
           </div>
 
           <Link
-            href="#contact"
+            href="/contact"
             onClick={() => setIsMobileMenuOpen(false)}
             className="block w-full text-center bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-3.5 rounded-2xl shadow-lg shadow-emerald-600/20 text-sm active:scale-95 transition-all"
           >
