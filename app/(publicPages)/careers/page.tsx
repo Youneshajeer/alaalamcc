@@ -1,6 +1,6 @@
 'use client';
-import React, { useState, useEffect } from 'react';
 
+import React, { useState, useEffect } from 'react';
 import ar from '@/i18n/ar.json';
 import en from '@/i18n/en.json';
 
@@ -9,10 +9,14 @@ const dictionaries = { ar, en };
 export default function CareersPage() {
   const [lang, setLang] = useState<'ar' | 'en'>('ar');
   const [submitted, setSubmitted] = useState(false);
+  const [selectedDeptId, setSelectedDeptId] = useState('');
+  
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
+    experience: '', // حقل سنوات الخبرة الجديد
+    department: '',
     position: '',
     cvFile: null as File | null
   });
@@ -32,11 +36,25 @@ export default function CareersPage() {
   }, [lang]);
 
   const t = dictionaries[lang].careers;
+  const selectedDept = t.departments?.find((d) => d.id === selectedDeptId);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
   };
+
+  // خيارات سنوات الخبرة المتاحة
+  const experienceOptions = lang === 'ar' ? [
+    "حديث التخرج (بدون خبرة)",
+    "من سنة إلى سنتين",
+    "من 3 إلى 5 سنوات",
+    "أكثر من 5 سنوات"
+  ] : [
+    "Fresh Graduate (No Experience)",
+    "1 - 2 Years",
+    "3 - 5 Years",
+    "More than 5 Years"
+  ];
 
   return (
     <div className={`min-h-screen flex flex-col justify-between bg-white dark:bg-slate-950 text-slate-900 dark:text-white transition-colors duration-300 ${lang === 'ar' ? 'dir-rtl' : 'dir-ltr'}`} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
@@ -64,7 +82,9 @@ export default function CareersPage() {
               <div className="w-16 h-16 bg-emerald-500 text-white rounded-full flex items-center justify-center text-3xl mx-auto shadow-lg">
                 ✓
               </div>
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white">تم إرسال طلبك بنجاح</h3>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+                {lang === 'ar' ? 'تم إرسال طلبك بنجاح' : 'Application Submitted Successfully'}
+              </h3>
               <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300">
                 {t.form.success}
               </p>
@@ -72,6 +92,7 @@ export default function CareersPage() {
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
               
+              {/* الاسم الكامل */}
               <div className="space-y-2">
                 <label className="block text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300">
                   {t.form.name}
@@ -86,6 +107,7 @@ export default function CareersPage() {
                 />
               </div>
 
+              {/* البريد ورقم الجوال */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="block text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300">
@@ -116,20 +138,71 @@ export default function CareersPage() {
                 </div>
               </div>
 
+              {/* حقل عدد سنوات الخبرة الجديد */}
               <div className="space-y-2">
                 <label className="block text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300">
-                  {t.form.position}
+                  {t.form.experience}
                 </label>
-                <input
-                  type="text"
+                <select
                   required
-                  placeholder={t.form.positionPlaceholder}
-                  value={formData.position}
-                  onChange={(e) => setFormData({...formData, position: e.target.value})}
-                  className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
-                />
+                  value={formData.experience}
+                  onChange={(e) => setFormData({...formData, experience: e.target.value})}
+                  className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all cursor-pointer"
+                >
+                  <option value="">{t.form.experiencePlaceholder}</option>
+                  {experienceOptions.map((opt, idx) => (
+                    <option key={idx} value={opt}>
+                      {opt}
+                    </option>
+                  ))}
+                </select>
               </div>
 
+              {/* اختيار القسم الرئيسي */}
+              <div className="space-y-2">
+                <label className="block text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300">
+                  {t.form.selectDepartment}
+                </label>
+                <select
+                  required
+                  value={selectedDeptId}
+                  onChange={(e) => {
+                    setSelectedDeptId(e.target.value);
+                    setFormData({...formData, department: e.target.value, position: ''});
+                  }}
+                  className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+                >
+                  <option value="">{t.form.selectDepartment}...</option>
+                  {t.departments?.map((dept) => (
+                    <option key={dept.id} value={dept.id}>
+                      {dept.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* اختيار المسمى الوظيفي المستهدف */}
+              <div className="space-y-2">
+                <label className="block text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300">
+                  {t.form.selectPosition}
+                </label>
+                <select
+                  required
+                  disabled={!selectedDeptId}
+                  value={formData.position}
+                  onChange={(e) => setFormData({...formData, position: e.target.value})}
+                  className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all disabled:opacity-50 cursor-pointer"
+                >
+                  <option value="">{t.form.positionPlaceholder}</option>
+                  {selectedDept?.positions.map((pos, idx) => (
+                    <option key={idx} value={pos}>
+                      {pos}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* رفع ملف الـ PDF */}
               <div className="space-y-2">
                 <label className="block text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300">
                   {t.form.cvFile}
@@ -143,6 +216,7 @@ export default function CareersPage() {
                 />
               </div>
 
+              {/* زر الإرسال */}
               <button
                 type="submit"
                 className="w-full py-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm sm:text-base shadow-lg shadow-emerald-600/20 transition-all duration-300"

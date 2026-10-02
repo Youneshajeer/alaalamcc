@@ -130,10 +130,10 @@ export default function HowItWorks() {
           </div>
 
           <div className="relative z-10 flex flex-col sm:flex-row gap-4 w-full md:w-auto">
-            <a
-              href="#contact"
-              className="bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold px-8 py-4 rounded-xl shadow-lg shadow-emerald-500/25 transition-all text-center text-sm whitespace-nowrap active:scale-95"
-            >
+         <a
+  href={`/request-service?service=consultation&lang=${lang}`}
+  className="bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold px-8 py-4 rounded-xl shadow-lg shadow-emerald-500/25 transition-all text-center text-sm whitespace-nowrap active:scale-95"
+>
               {commonT.cta.startSession}
             </a>
           </div>

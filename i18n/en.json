@@ -493,23 +493,87 @@
   }
 },
 "careers": {
-  "eyebrow": "Join Our Team",
-  "title": "Submit Your CV",
-  "description": "We are always looking for qualified national talents to join our operational call center and tech ecosystem.",
-  "form": {
-    "name": "Full Name",
-    "namePlaceholder": "Enter your full name",
-    "email": "Email Address",
-    "emailPlaceholder": "name@domain.com",
-    "phone": "Phone Number",
-    "phonePlaceholder": "05XXXXXXXX",
-    "position": "Target Position",
-    "positionPlaceholder": "e.g., Customer Service Agent / Tech Specialist",
-    "cvFile": "CV / Resume (PDF Only)",
-    "submit": "Submit Application",
-    "success": "Thank you! Your CV has been successfully submitted and our HR team will contact you if shortlisted."
-  }
-},
+    "eyebrow": "Join Our Team",
+    "title": "Submit Your Resume",
+    "description": "We are always looking for qualified national talents to join our operational ecosystem in contact centers and technology.",
+    "form": {
+      "name": "Full Name",
+      "namePlaceholder": "Enter your full name",
+      "email": "Email Address",
+      "emailPlaceholder": "name@domain.com",
+      "phone": "Mobile Number",
+      "phonePlaceholder": "05XXXXXXXX",
+      "experience": "Years of Experience",
+    "experiencePlaceholder": "Select years of experience...",
+      "selectDepartment": "Select Department / Major",
+      "selectPosition": "Select Target Position",
+      "positionPlaceholder": "Select available position...",
+      "cvFile": "Profile / CV (PDF only)",
+      "submit": "Submit Application",
+      "success": "Thank you! Your resume has been successfully received, and our recruitment team will contact you if you meet the requirements."
+    },
+    "departments": [
+      {
+        "id": "accounting_finance",
+        "name": "Accounting & Finance",
+        "positions": [
+          "General Accountant",
+          "Cost Accountant",
+          "Collections & Financial Follow-up Specialist",
+          "Financial Analyst",
+          "Internal Auditor",
+          "Finance & Administrative Assistant",
+          "Payroll & Financial HR Specialist"
+        ]
+      },
+      {
+        "id": "networks_it",
+        "name": "Networks, Infrastructure & IT",
+        "positions": [
+          "Network & Infrastructure Engineer",
+          "Systems Administrator",
+          "IT Support Specialist",
+          "Cybersecurity Analyst",
+          "Database Administrator",
+          "Information Security & Hardware Maintenance Engineer",
+          "Network & Telecom Installation Technician"
+        ]
+      },
+      {
+        "id": "admin_secretariat",
+        "name": "Administration, Secretariat & Office Support",
+        "positions": [
+          "Executive Secretary / Office Manager",
+          "Administrative & HR Officer",
+          "Archive & Digital Documentation Specialist",
+          "Receptionist & Front Desk Agent",
+          "Data Entry & Administrative Coordinator",
+          "Administrative Projects Coordinator"
+        ]
+      },
+      {
+        "id": "call_center",
+        "name": "Call Center & Customer Service",
+        "positions": [
+          "Inbound Customer Service Agent",
+          "Telesales Representative",
+          "Omni-Channel / Social Media Support Specialist",
+          "QA Analyst / Evaluator",
+          "Call Center Supervisor",
+          "Call Center Operations Manager"
+        ]
+      },
+      {
+        "id": "ai_robotics",
+        "name": "AI & Software Robotics (RPA)",
+        "positions": [
+          "RPA Developer",
+          "AI & Conversational Bot Engineer",
+          "Data Analyst"
+        ]
+      }
+    ]
+  },
 "notFound": {
   "code": "404",
   "eyebrow": "Oops, Page Not Found",
@@ -525,5 +589,23 @@
   "description": "An unexpected system or server error has occurred. Our technical team is available around the clock to resolve such issues. You can try again or contact us directly.",
   "retry": "Try Again",
   "backHome": "Back to Home"
+},
+"requestService": {
+  "badge": "BPO Services",
+  "title": "Request Service Call-back",
+  "subtitle": "Enter your details and our operations team will contact you shortly to confirm your request.",
+  "serviceLabel": "Requested Service",
+  "servicePlaceholder": "No service selected",
+ "companyLabel": "Company / Organization Name",
+  "companyPlaceholder": "Enter your company or organization name",
+  "nameLabel": "Full Name",
+  "namePlaceholder": "Enter your full name",
+  "phoneLabel": "Mobile Number",
+  "phonePlaceholder": "05XXXXXXXX",
+  "messageLabel": "Your Note or Request",
+  "messagePlaceholder": "Write your notes or additional details...",
+  "submitBtn": "Submit Call-back Request",
+  "successTitle": "Request Submitted Successfully",
+  "successDesc": "Thank you! Your request has been received and our team will contact you soon."
 }
 }

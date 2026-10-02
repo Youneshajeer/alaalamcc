@@ -29,6 +29,7 @@ export default function Services() {
 
   const servicesList = [
     {
+      id: 'inbound',
       num: t.inbound.number,
       icon: t.inbound.icon,
       title: t.inbound.title,
@@ -37,6 +38,7 @@ export default function Services() {
       features: t.inbound.features
     },
     {
+      id: 'outbound',
       num: t.outbound.number,
       icon: t.outbound.icon,
       title: t.outbound.title,
@@ -45,6 +47,7 @@ export default function Services() {
       features: t.outbound.features
     },
     {
+      id: 'technicalSupport',
       num: t.technicalSupport.number,
       icon: t.technicalSupport.icon,
       title: t.technicalSupport.title,
@@ -53,6 +56,7 @@ export default function Services() {
       features: t.technicalSupport.features
     },
     {
+      id: 'omnichannel',
       num: t.omnichannel.number,
       icon: t.omnichannel.icon,
       title: t.omnichannel.title,
@@ -74,7 +78,6 @@ export default function Services() {
       dir={lang === 'ar' ? 'rtl' : 'ltr'}
       className={`py-20 bg-white dark:bg-slate-950 text-slate-900 dark:text-white relative overflow-hidden transition-colors duration-300 ${lang === 'ar' ? 'text-right' : 'text-left'}`}
     >
-      
       <div className="absolute -top-24 right-10 w-96 h-96 bg-emerald-100/60 dark:bg-emerald-900/10 rounded-full blur-3xl pointer-events-none"></div>
       <div className="absolute bottom-10 left-10 w-96 h-96 bg-sky-100/60 dark:bg-sky-900/10 rounded-full blur-3xl pointer-events-none"></div>
 
@@ -142,7 +145,7 @@ export default function Services() {
 
               <div className="pt-4">
                 <a
-                  href="/contact"
+                  href={`/request-service?service=${service.id}&lang=${lang}`}
                   className="block text-center w-full bg-slate-900 dark:bg-slate-800 hover:bg-emerald-600 dark:hover:bg-emerald-600 text-white font-bold py-3 px-6 rounded-xl transition-all duration-200 text-sm shadow-md active:scale-95"
                 >
                   {commonT.cta.requestService}
@@ -180,7 +183,7 @@ export default function Services() {
           </div>
 
           <a
-            href="/contact"
+            href={`/request-service?service=infrastructure&lang=${lang}`}
             className="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold px-6 py-3.5 rounded-xl shadow-lg shadow-emerald-600/20 transition-all text-sm whitespace-nowrap active:scale-95"
           >
             {commonT.cta.requestQuote}
