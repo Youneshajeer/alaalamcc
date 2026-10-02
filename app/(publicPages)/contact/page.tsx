@@ -41,7 +41,6 @@ export default function ContactPage() {
 
   return (
     <div className={`min-h-screen flex flex-col justify-between bg-white dark:bg-slate-950 text-slate-900 dark:text-white transition-colors duration-300 ${lang === 'ar' ? 'dir-rtl' : 'dir-ltr'}`} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
-      <Header />
 
       <main className="grow py-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto w-full space-y-16">
         
@@ -188,7 +187,6 @@ export default function ContactPage() {
 
       </main>
 
-      <Footer />
     </div>
   );
 }
