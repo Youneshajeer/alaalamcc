@@ -142,32 +142,11 @@ export default function Hero() {
         </div>
       ))}
 
-      {/* أزرار التنقل الجانبية */}
-      <button
-        onClick={handlePrev}
-        className="absolute left-4 sm:left-8 top-[50%] -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-blue-600/80 hover:bg-blue-600 text-white flex items-center justify-center shadow-2xl backdrop-blur-md transition-all active:scale-95 group cursor-pointer"
-        aria-label="Previous Slide"
-      >
-        <svg className="w-6 h-6 rtl:rotate-180 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
-
-      <button
-        onClick={handleNext}
-        className="absolute right-4 sm:right-8 top-[50%] -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-blue-600/80 hover:bg-blue-600 text-white flex items-center justify-center shadow-2xl backdrop-blur-md transition-all active:scale-95 group cursor-pointer"
-        aria-label="Next Slide"
-      >
-        <svg className="w-6 h-6 rtl:rotate-180 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
-
       {/* المحتوى الرئيسي للـ Hero */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-25 w-full h-full flex flex-col justify-between py-12">
         
         {/* قسم ميزات التشغيل في أعلى الشاشة */}
-        <div className="w-full max-w-3xl mx-auto bg-slate-950/60 backdrop-blur-xl border border-slate-800/80 px-6 py-3.5 rounded-2xl shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-4 mt-6">
+        <div className="w-full max-w-3xl mx-auto bg-slate-950/60 backdrop-blur-xl border border-slate-800/80 px-6 py-3.5 rounded-2xl shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-4 mt-4">
           
           <div className={`flex items-center gap-3.5 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
             <span className="text-xl sm:text-2xl p-2 bg-slate-900/90 rounded-xl shadow-inner border border-slate-700 shrink-0 text-emerald-400">
@@ -200,7 +179,7 @@ export default function Hero() {
         </div>
 
         {/* النصوص الوسطى المتغيرة */}
-        <div key={currentSlide} className="space-y-5 animate-fade-in max-w-4xl mx-auto text-center my-auto">
+        <div key={currentSlide} className="space-y-4 animate-fade-in max-w-4xl mx-auto text-center my-auto">
           
           <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-slate-900/80 border border-emerald-500/60 backdrop-blur-md shadow-xl mx-auto">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
@@ -217,24 +196,52 @@ export default function Hero() {
             {activeSlide.description}
           </p>
 
-          <div className="flex flex-wrap gap-4 justify-center pt-2">
-            <a
-              href="/contact"
-              className="bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold px-8 py-3.5 rounded-xl shadow-lg shadow-emerald-500/30 transition-all active:scale-95 text-sm sm:text-base whitespace-nowrap"
+          {/* سطر الأزرار يوسطه أزرار الانتقال الجانبية لتكون موازية تماماً للأزرار */}
+          <div className="flex items-center justify-center gap-3 sm:gap-6 pt-2">
+            
+            {/* سهم الانتقال السابق (موازي لليسار/اليمين حسب الاتجاه) */}
+            <button
+              onClick={handlePrev}
+              className="w-11 h-11 rounded-full bg-slate-900/90 hover:bg-blue-600 text-white border border-slate-700 flex items-center justify-center shadow-xl backdrop-blur-md transition-all active:scale-95 cursor-pointer group shrink-0"
+              aria-label="Previous Slide"
             >
-              {cta.requestDemo}
-            </a>
-            <a
-              href="#services"
-              className="bg-slate-900/80 hover:bg-slate-900 text-white border border-slate-700 font-semibold px-8 py-3.5 rounded-xl backdrop-blur-md transition-all active:scale-95 shadow-md text-sm sm:text-base whitespace-nowrap"
+              <svg className="w-5 h-5 rtl:rotate-180 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
+            {/* الأزرار الرئيسية */}
+            <div className="flex flex-wrap gap-3 sm:gap-4 justify-center">
+              <a
+                href="/contact"
+                className="bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold px-8 py-3.5 rounded-xl shadow-lg shadow-emerald-500/30 transition-all active:scale-95 text-sm sm:text-base whitespace-nowrap"
+              >
+                {cta.requestDemo}
+              </a>
+              <a
+                href="#services"
+                className="bg-slate-900/80 hover:bg-slate-900 text-white border border-slate-700 font-semibold px-8 py-3.5 rounded-xl backdrop-blur-md transition-all active:scale-95 shadow-md text-sm sm:text-base whitespace-nowrap"
+              >
+                {cta.viewServices}
+              </a>
+            </div>
+
+            {/* سهم الانتقال التالي */}
+            <button
+              onClick={handleNext}
+              className="w-11 h-11 rounded-full bg-slate-900/90 hover:bg-blue-600 text-white border border-slate-700 flex items-center justify-center shadow-xl backdrop-blur-md transition-all active:scale-95 cursor-pointer group shrink-0"
+              aria-label="Next Slide"
             >
-              {cta.viewServices}
-            </a>
+              <svg className="w-5 h-5 rtl:rotate-180 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+
           </div>
 
-          {/* مؤشر السكرول (المزيد) تحت أزرار اطلب عرضاً تجريبياً واستعرض الخدمات */}
-          <div className="pt-6 flex flex-col items-center justify-center text-slate-300 animate-bounce pointer-events-none">
-            <span className="text-xs font-semibold tracking-wider mb-1">{scrollText}</span>
+          {/* مؤشر السكرول (المزيد) تحت الأزرار مباشرة */}
+          <div className="pt-3 flex flex-col items-center justify-center text-slate-300 animate-bounce pointer-events-none">
+            <span className="text-xs font-semibold tracking-wider mb-0.5">{scrollText}</span>
             <svg className="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
             </svg>
