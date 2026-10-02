@@ -1,16 +1,13 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+
 import ar from '@/i18n/ar.json';
 import en from '@/i18n/en.json';
-
 const dictionaries = { ar, en };
 
 export default function ContactPage() {
   const [lang, setLang] = useState<'ar' | 'en'>('ar');
-
   useEffect(() => {
     const savedLang = (localStorage.getItem('lang') as 'ar' | 'en') || 'ar';
     setLang(savedLang);
@@ -54,10 +51,8 @@ export default function ContactPage() {
           </div>
         </div>
 
-        {/* بطاقات معلومات الاتصال الاحترافية */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
           
-          {/* بطاقة معلومات التواصل الأساسية */}
           <div className="bg-slate-50/50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 space-y-6 shadow-sm flex flex-col justify-between">
             <div className="space-y-6">
               <h3 className="text-xl font-bold text-slate-900 dark:text-white pb-2 border-b border-slate-200 dark:border-slate-800">
@@ -66,7 +61,6 @@ export default function ContactPage() {
 
               <div className="space-y-5 text-sm sm:text-base text-slate-600 dark:text-slate-300">
                 
-                {/* العنوان */}
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-slate-800 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0 text-lg shadow-sm">
                     📍
@@ -77,7 +71,6 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                {/* الهواتف */}
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-slate-800 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0 text-lg shadow-sm">
                     📞
@@ -95,7 +88,6 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                {/* البريد العام */}
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-slate-800 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0 text-lg shadow-sm">
                     ✉️️
@@ -108,7 +100,6 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                {/* المبيعات */}
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-slate-800 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0 text-lg shadow-sm">
                     💼
@@ -121,7 +112,6 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                {/* الدعم الفني */}
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-slate-800 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0 text-lg shadow-sm">
                     🛠️
@@ -142,7 +132,6 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* بطاقة الدعم والالتزام التشغيلي */}
           <div className="bg-emerald-900 text-white rounded-3xl p-8 space-y-6 shadow-md flex flex-col justify-between relative overflow-hidden">
             <div className="absolute -right-10 -bottom-10 w-40 h-40 bg-emerald-800/40 rounded-full blur-2xl pointer-events-none"></div>
 
@@ -168,7 +157,6 @@ export default function ContactPage() {
 
       </main>
 
-      <Footer />
     </div>
   );
 }

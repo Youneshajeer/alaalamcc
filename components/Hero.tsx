@@ -119,7 +119,7 @@ export default function Hero() {
 
               <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
                 <a
-                  href="#contact"
+                  href="/contact"
                   className="bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold px-8 py-3.5 rounded-xl shadow-lg shadow-emerald-500/25 transition-all text-center active:scale-95 text-sm sm:text-base whitespace-nowrap"
                 >
                   {cta.requestDemo}

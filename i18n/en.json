@@ -509,5 +509,21 @@
     "submit": "Submit Application",
     "success": "Thank you! Your CV has been successfully submitted and our HR team will contact you if shortlisted."
   }
+},
+"notFound": {
+  "code": "404",
+  "eyebrow": "Oops, Page Not Found",
+  "title": "The page you are looking for is unavailable or has been moved",
+  "description": "It seems the link you entered might be incorrect or the page has been moved or deleted. You can return to the homepage or reach out through our 24/7 available contact channels.",
+  "backHome": "Back to Home",
+  "contactUs": "Contact Us"
+},
+"errorPage": {
+  "code": "500",
+  "eyebrow": "An Unexpected Error Occurred",
+  "title": "Sorry, we encountered a problem processing your request",
+  "description": "An unexpected system or server error has occurred. Our technical team is available around the clock to resolve such issues. You can try again or contact us directly.",
+  "retry": "Try Again",
+  "backHome": "Back to Home"
 }
 }

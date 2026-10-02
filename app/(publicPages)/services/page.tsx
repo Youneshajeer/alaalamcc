@@ -142,7 +142,7 @@ export default function Services() {
 
               <div className="pt-4">
                 <a
-                  href="#contact"
+                  href="/contact"
                   className="block text-center w-full bg-slate-900 dark:bg-slate-800 hover:bg-emerald-600 dark:hover:bg-emerald-600 text-white font-bold py-3 px-6 rounded-xl transition-all duration-200 text-sm shadow-md active:scale-95"
                 >
                   {commonT.cta.requestService}
@@ -180,7 +180,7 @@ export default function Services() {
           </div>
 
           <a
-            href="#contact"
+            href="/contact"
             className="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold px-6 py-3.5 rounded-xl shadow-lg shadow-emerald-600/20 transition-all text-sm whitespace-nowrap active:scale-95"
           >
             {commonT.cta.requestQuote}
