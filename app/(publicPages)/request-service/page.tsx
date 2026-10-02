@@ -14,7 +14,7 @@ function RequestServiceContent() {
 
   const [lang, setLang] = useState<'ar' | 'en'>(langParam || 'ar');
   const [submitted, setSubmitted] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
+  const [formError, setFormError] = useState('');
 
   // دالة مطابقة المعرف الرمزي مع ملفات الترجمة الحالية
   const getResolvedService = (param: string, currentLang: 'ar' | 'en') => {
@@ -36,12 +36,21 @@ function RequestServiceContent() {
     service: getResolvedService(serviceParam, lang),
     company: '',
     name: '',
+    email: '', // حقل البريد الإلكتروني المضاف حديثاً
+    phone: '',
+    message: ''
+  });
+
+  // حالات الأخطاء الخاصة بكل حقل
+  const [errors, setErrors] = useState({
+    company: '',
+    name: '',
+    email: '',
     phone: '',
     message: ''
   });
 
   // مزامنة اللغة من التخزين المحلي أو الرابط
-  // مراقبة تغيير اللغة من التخزين المحلي (LocalStorage) أو الهيدر بفاصل زمني قصير تماماً مثل صفحة الخدمات
   useEffect(() => {
     const checkLangInterval = setInterval(() => {
       const currentLang = (localStorage.getItem('lang') as 'ar' | 'en') || 'ar';
@@ -60,44 +69,78 @@ function RequestServiceContent() {
     }));
   }, [lang, serviceParam]);
 
-  useEffect(() => {
-    setFormData(prev => ({
-      ...prev,
-      service: getResolvedService(serviceParam, lang)
-    }));
-  }, [lang, serviceParam]);
-
   const t = dictionaries[lang].requestService;
 
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    if (/[^0-9]/.test(value)) {
-      setErrorMsg(
-        lang === 'ar'
-          ? 'يرجى التأكد من المدخلات: يرجى إدخال أرقام فقط في حقل رقم الجوال.'
-          : 'Please check inputs: enter numbers only in the mobile number field.'
+  // دالة التحقق من صحة المدخلات قبل الإرسال
+  const validateForm = () => {
+    let isValid = true;
+    const newErrors = {
+      company: '',
+      name: '',
+      email: '',
+      phone: '',
+      message: ''
+    };
+
+    // 1. التحقق من اسم الشركة
+    if (!formData.company.trim()) {
+      newErrors.company = lang === 'ar' ? 'الرجاء إدخال اسم الشركة أو الجهة.' : 'Please enter your company name.';
+      isValid = false;
+    }
+
+    // 2. التحقق من الاسم
+    if (!formData.name.trim()) {
+      newErrors.name = lang === 'ar' ? 'الرجاء إدخال الاسم الكامل.' : 'Please enter your full name.';
+      isValid = false;
+    }
+
+    // 3. التحقق من البريد الإلكتروني وصيغته
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email.trim()) {
+      newErrors.email = lang === 'ar' ? 'الرجاء إدخال البريد الإلكتروني.' : 'Please enter your email address.';
+      isValid = false;
+    } else if (!emailRegex.test(formData.email)) {
+      newErrors.email = lang === 'ar' ? 'صيغة البريد الإلكتروني غير صحيحة.' : 'Invalid email format.';
+      isValid = false;
+    }
+
+    // 4. التحقق من رقم الهاتف/الجوال
+    const phoneRegex = /^[\+]?[\d\s-]{8,15}$/;
+    if (!formData.phone.trim()) {
+      newErrors.phone = lang === 'ar' ? 'الرجاء إدخال رقم الجوال.' : 'Please enter your phone number.';
+      isValid = false;
+    } else if (!phoneRegex.test(formData.phone)) {
+      newErrors.phone = lang === 'ar' ? 'رقم الجوال غير صحيح أو قصير جداً.' : 'Invalid or too short mobile number.';
+      isValid = false;
+    }
+
+    // 5. التحقق من تفاصيل الطلب / الرسالة (اختياري أو إلزامي حسب رغبتك، هنا سنجعله إلزامياً كمثال أو يمكنك إزالته إذا كان اختيارياً)
+    if (!formData.message.trim()) {
+      newErrors.message = lang === 'ar' ? 'الرجاء إدخال تفاصيل الطلب أو الاستفسار.' : 'Please enter your message or request details.';
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+
+    if (!isValid) {
+      setFormError(
+        lang === 'ar' 
+          ? 'يرجى تعبئة جميع الحقول المطلوبة بشكل صحيح وتصحيح الأخطاء أعلاه قبل الإرسال.' 
+          : 'Please fill in all required fields correctly and fix the errors above before submitting.'
       );
     } else {
-      setErrorMsg('');
+      setFormError('');
     }
-    const numericValue = value.replace(/\D/g, '');
-    setFormData({ ...formData, phone: numericValue });
+
+    return isValid;
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!/^\d{9,15}$/.test(formData.phone)) {
-      setErrorMsg(
-        lang === 'ar'
-          ? 'يرجى التأكد من المدخلات: رقم الجوال غير صحيح أو قصير جداً.'
-          : 'Please check inputs: invalid or too short mobile number.'
-      );
-      return;
+    if (validateForm()) {
+      setFormError('');
+      setSubmitted(true);
     }
-
-    setErrorMsg('');
-    setSubmitted(true);
   };
 
   return (
@@ -133,8 +176,9 @@ function RequestServiceContent() {
               </p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6" noValidate>
               
+              {/* الخدمة المختارة */}
               <div className="space-y-2">
                 <label className="block text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300">
                   {t.serviceLabel}
@@ -148,49 +192,92 @@ function RequestServiceContent() {
                 />
               </div>
 
+              {/* اسم الشركة */}
               <div className="space-y-2">
                 <label className="block text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300">
                   {t.companyLabel}
                 </label>
                 <input
                   type="text"
-                  required
                   placeholder={t.companyPlaceholder}
                   value={formData.company}
-                  onChange={(e) => setFormData({...formData, company: e.target.value})}
-                  className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+                  onChange={(e) => {
+                    setFormData({...formData, company: e.target.value});
+                    if (errors.company) setErrors({...errors, company: ''});
+                    if (formError) setFormError('');
+                  }}
+                  className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-950 border text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 transition-all ${
+                    errors.company ? 'border-red-500 focus:ring-red-500' : 'border-slate-300 dark:border-slate-800 focus:ring-emerald-500'
+                  }`}
                 />
+                {errors.company && <p className="text-xs text-red-500 font-semibold">{errors.company}</p>}
               </div>
 
+              {/* الاسم الكامل */}
               <div className="space-y-2">
                 <label className="block text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300">
                   {t.nameLabel}
                 </label>
                 <input
                   type="text"
-                  required
                   placeholder={t.namePlaceholder}
                   value={formData.name}
-                  onChange={(e) => setFormData({...formData, name: e.target.value})}
-                  className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+                  onChange={(e) => {
+                    setFormData({...formData, name: e.target.value});
+                    if (errors.name) setErrors({...errors, name: ''});
+                    if (formError) setFormError('');
+                  }}
+                  className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-950 border text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 transition-all ${
+                    errors.name ? 'border-red-500 focus:ring-red-500' : 'border-slate-300 dark:border-slate-800 focus:ring-emerald-500'
+                  }`}
                 />
+                {errors.name && <p className="text-xs text-red-500 font-semibold">{errors.name}</p>}
               </div>
 
+              {/* البريد الإلكتروني (المضاف حديثاً) */}
+              <div className="space-y-2">
+                <label className="block text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300">
+                  {lang === 'ar' ? 'البريد الإلكتروني' : 'Email Address'}
+                </label>
+                <input
+                  type="email"
+                  placeholder={lang === 'ar' ? 'example@domain.com' : 'example@domain.com'}
+                  value={formData.email}
+                  onChange={(e) => {
+                    setFormData({...formData, email: e.target.value});
+                    if (errors.email) setErrors({...errors, email: ''});
+                    if (formError) setFormError('');
+                  }}
+                  className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-950 border text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 transition-all ${
+                    errors.email ? 'border-red-500 focus:ring-red-500' : 'border-slate-300 dark:border-slate-800 focus:ring-emerald-500'
+                  }`}
+                />
+                {errors.email && <p className="text-xs text-red-500 font-semibold">{errors.email}</p>}
+              </div>
+
+              {/* رقم الجوال */}
               <div className="space-y-2">
                 <label className="block text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300">
                   {t.phoneLabel}
                 </label>
                 <input
                   type="tel"
-                  required
                   maxLength={15}
                   placeholder={t.phonePlaceholder}
                   value={formData.phone}
-                  onChange={handlePhoneChange}
-                  className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+                  onChange={(e) => {
+                    setFormData({...formData, phone: e.target.value});
+                    if (errors.phone) setErrors({...errors, phone: ''});
+                    if (formError) setFormError('');
+                  }}
+                  className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-950 border text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 transition-all ${
+                    errors.phone ? 'border-red-500 focus:ring-red-500' : 'border-slate-300 dark:border-slate-800 focus:ring-emerald-500'
+                  }`}
                 />
+                {errors.phone && <p className="text-xs text-red-500 font-semibold">{errors.phone}</p>}
               </div>
 
+              {/* تفاصيل الطلب */}
               <div className="space-y-2">
                 <label className="block text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300">
                   {t.messageLabel}
@@ -199,20 +286,30 @@ function RequestServiceContent() {
                   rows={4}
                   placeholder={t.messagePlaceholder}
                   value={formData.message}
-                  onChange={(e) => setFormData({...formData, message: e.target.value})}
-                  className="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all resize-none"
+                  onChange={(e) => {
+                    setFormData({...formData, message: e.target.value});
+                    if (errors.message) setErrors({...errors, message: ''});
+                    if (formError) setFormError('');
+                  }}
+                  className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-950 border text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 transition-all resize-none ${
+                    errors.message ? 'border-red-500 focus:ring-red-500' : 'border-slate-300 dark:border-slate-800 focus:ring-emerald-500'
+                  }`}
                 ></textarea>
+                {errors.message && <p className="text-xs text-red-500 font-semibold">{errors.message}</p>}
               </div>
 
-              {errorMsg && (
-                <div className="p-3 rounded-xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-800 text-rose-600 dark:text-rose-400 text-xs sm:text-sm font-bold text-center">
-                  {errorMsg}
+              {/* رسالة الخطأ العامة فوق زر الإرسال مباشرة */}
+              {formError && (
+                <div className="p-4 rounded-xl bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900 text-red-600 dark:text-red-400 text-xs sm:text-sm font-semibold flex items-center gap-2 animate-fade-in">
+                  <span className="text-base">⚠️</span>
+                  <span>{formError}</span>
                 </div>
               )}
 
+              {/* زر الإرسال */}
               <button
                 type="submit"
-                className="w-full py-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm sm:text-base shadow-lg shadow-emerald-600/20 transition-all duration-300"
+                className="w-full py-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm sm:text-base shadow-lg shadow-emerald-600/20 transition-all duration-300 cursor-pointer"
               >
                 {t.submitBtn}
               </button>
