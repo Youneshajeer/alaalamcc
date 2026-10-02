@@ -112,7 +112,7 @@ export default function Hero() {
                 </span>
                 <br className="hidden sm:inline" />
                 <span 
-                  className="bg-linear-to-r from-amber-400 via-orange-500 to-yellow-400 bg-clip-text text-transparent inline-block mt-1"
+                  className="bg-linear-to-r text-green-400 bg-clip-text inline-block mt-1"
                   style={{
                     WebkitTextStroke: '1px rgba(0, 0, 0, 0.7)',
                     filter: 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.9))'
