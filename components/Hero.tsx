@@ -28,6 +28,9 @@ export default function Hero() {
   const t: any = dictionaries[lang]?.home?.hero || {};
   const translatedSlides = t?.slides || [];
   const cta = dictionaries[lang]?.common?.cta || { requestDemo: 'اطلب عرض خدمة', viewServices: 'استعرض الخدمات' };
+  
+  // ترجمة كلمة المزيد الخاصة بمؤشر التمرير
+  const scrollText = lang === 'en' ? 'More' : 'المزيد';
 
   // مصفوفة الشرائح المعتمدة على ملفات الترجمة للغتين العربية والإنجليزية
   const slides = [
@@ -163,7 +166,7 @@ export default function Hero() {
       {/* المحتوى الرئيسي للـ Hero */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-25 w-full h-full flex flex-col justify-between py-12">
         
-        {/* قسم ميزات التشغيل في أعلى الشاشة (فوق الصور والنصوص) */}
+        {/* قسم ميزات التشغيل في أعلى الشاشة */}
         <div className="w-full max-w-3xl mx-auto bg-slate-950/60 backdrop-blur-xl border border-slate-800/80 px-6 py-3.5 rounded-2xl shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-4 mt-6">
           
           <div className={`flex items-center gap-3.5 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
@@ -227,6 +230,14 @@ export default function Hero() {
             >
               {cta.viewServices}
             </a>
+          </div>
+
+          {/* مؤشر السكرول (المزيد) تحت أزرار اطلب عرضاً تجريبياً واستعرض الخدمات */}
+          <div className="pt-6 flex flex-col items-center justify-center text-slate-300 animate-bounce pointer-events-none">
+            <span className="text-xs font-semibold tracking-wider mb-1">{scrollText}</span>
+            <svg className="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
           </div>
 
         </div>
