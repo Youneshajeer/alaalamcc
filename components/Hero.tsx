@@ -8,6 +8,7 @@ const dictionaries = { ar, en };
 
 export default function Hero() {
   const [lang, setLang] = useState<'ar' | 'en'>('ar');
+  const [currentFeature, setCurrentFeature] = useState(0);
 
   useEffect(() => {
     const savedLang = (localStorage.getItem('lang') as 'ar' | 'en') || 'ar';
@@ -23,6 +24,13 @@ export default function Hero() {
     return () => clearInterval(checkLangInterval);
   }, [lang]);
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentFeature((prev) => (prev + 1) % 4);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
   const t = dictionaries[lang].home.hero;
   const cta = dictionaries[lang].common.cta;
   const quickFeatures = dictionaries[lang].home.quickFeatures;
@@ -32,21 +40,25 @@ export default function Hero() {
       title: quickFeatures.saudiHosting.title,
       desc: quickFeatures.saudiHosting.description,
       icon: quickFeatures.saudiHosting.icon,
+      image: '/images/gallery/sa-hosting.png',
     },
     {
       title: quickFeatures.registered.title,
       desc: quickFeatures.registered.description,
       icon: quickFeatures.registered.icon,
+      image: '/images/gallery/callCenterRegistration.png',
     },
     {
       title: quickFeatures.multichannel.title,
       desc: quickFeatures.multichannel.description,
       icon: quickFeatures.multichannel.icon,
+      image: '/images/gallery/watsapp-calls.png',
     },
     {
       title: quickFeatures.flexibleCapacity.title,
       desc: quickFeatures.flexibleCapacity.description,
       icon: quickFeatures.flexibleCapacity.icon,
+      image: '/images/gallery/team.png',
     },
   ];
 
@@ -73,11 +85,10 @@ export default function Hero() {
       `}</style>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
           <div className={`w-full lg:col-span-7 relative rounded-3xl overflow-hidden p-6 sm:p-10 border border-slate-800 bg-slate-900/40 backdrop-blur-md flex flex-col justify-between ${lang === 'ar' ? 'text-center lg:text-right' : 'text-center lg:text-left'} space-y-6 shadow-2xl`}>
             
-            {/* تم زيادة وضوح الصورة الخلفية وتخفيف طبقة التعتيم للحفاظ على نفس التصميم بوضوح أعلى */}
             <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
               <img
                 src="/images/hero-bg.png"
@@ -135,31 +146,55 @@ export default function Hero() {
 
           </div>
 
-          <div className="w-full lg:col-span-5 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md p-5 sm:p-7 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 space-y-3.5">
-            <h3 className={`text-base sm:text-lg font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-800 pb-2.5 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
-              {quickFeatures.title}
-            </h3>
+          <div className="w-full lg:col-span-5 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md p-5 sm:p-6 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between space-y-4">
             
-            <div className="space-y-3">
-              {points.map((point, idx) => (
-                <div
-                  key={idx}
-                  className={`flex items-start gap-3 p-3 rounded-2xl bg-emerald-50/90 dark:bg-slate-800/80 border border-emerald-200/80 dark:border-slate-700 text-emerald-950 dark:text-slate-100 transition-all duration-300 hover:bg-sky-500 hover:border-sky-400 hover:text-white hover:scale-[1.02] cursor-pointer group shadow-sm ${lang === 'ar' ? 'text-right' : 'text-left'}`}
-                >
-                  <span className="text-xl sm:text-2xl p-1.5 bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-emerald-100 dark:border-slate-700 group-hover:bg-white/20 group-hover:border-white/30 transition-colors shrink-0">
-                    {point.icon}
-                  </span>
-                  <div>
-                    <h4 className="font-bold text-xs sm:text-sm text-emerald-900 dark:text-white group-hover:text-white transition-colors">
-                      {point.title}
-                    </h4>
-                    <p className="text-[11px] sm:text-xs text-emerald-700/90 dark:text-slate-300 group-hover:text-sky-50 transition-colors mt-0.5 leading-relaxed">
-                      {point.desc}
-                    </p>
-                  </div>
-                </div>
-              ))}
+            <div className="border-b border-slate-200 dark:border-slate-800 pb-2.5">
+              <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+                {quickFeatures.title}
+              </h3>
             </div>
+            
+            <div className="relative rounded-2xl overflow-hidden grow flex flex-col justify-end p-6 shadow-inner border border-slate-200/60 dark:border-slate-700/60 group min-h-80">
+              
+              <div className="absolute inset-0 z-0">
+                <img
+                  src={points[currentFeature].image}
+                  alt={points[currentFeature].title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-85 dark:opacity-75"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-slate-950/85 via-slate-950/30 to-transparent"></div>
+              </div>
+
+              <div className={`relative z-10 space-y-2.5 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+                <div className="inline-flex items-center gap-2">
+                  <span className="text-xl sm:text-2xl p-1.5 bg-white/90 dark:bg-slate-900/90 rounded-xl shadow-sm border border-emerald-100 dark:border-slate-700">
+                    {points[currentFeature].icon}
+                  </span>
+                  <h4 className="font-bold text-sm sm:text-base text-white drop-shadow-md">
+                    {points[currentFeature].title}
+                  </h4>
+                </div>
+
+                <p className="text-xs sm:text-sm text-slate-100 font-medium leading-relaxed drop-shadow">
+                  {points[currentFeature].desc}
+                </p>
+              </div>
+
+              <div className="relative z-10 flex items-center justify-center gap-1.5 mt-6 pt-3 border-t border-white/10">
+                {points.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setCurrentFeature(idx)}
+                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                      idx === currentFeature ? 'w-6 bg-blue-400' : 'w-1.5 bg-white/40 hover:bg-white/70'
+                    }`}
+                    aria-label={`Slide ${idx + 1}`}
+                  />
+                ))}
+              </div>
+
+            </div>
+
           </div>
 
         </div>
